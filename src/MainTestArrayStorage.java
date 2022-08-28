@@ -4,7 +4,6 @@
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
-
     public static void main(String[] args) {
         Resume r1 = new Resume();
         r1.uuid = "uuid1";
