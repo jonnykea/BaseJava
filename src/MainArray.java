@@ -11,12 +11,11 @@ public class MainArray {
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Resume r;
         while (true) {
-            System.out.print("Введите одну из команд - (list | size | save uuid | delete uuid | get uuid | clear | exit): ");
+            System.out.print("Press of command for execution - (list | size | save uuid | delete uuid | get uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
             if (params.length < 1 || params.length > 2) {
-                System.out.println("Неверная команда.");
+                System.out.println("Incorrect input");
                 continue;
             }
             String uuid = null;
@@ -31,18 +30,40 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume();
-                    r.uuid = uuid;
-                    ARRAY_STORAGE.save(r);
-                    printAll();
-                    break;
+                    if (!ARRAY_STORAGE.isFull()) {
+                        if (uuid == null) {
+                            System.out.println("Incorrect input \n" + "example: save uuid ");
+                            break;
+                        }
+                        ARRAY_STORAGE.save(new Resume(uuid));
+                        printAll();
+                        break;
+                    }
+                    System.out.println("There isn't place to save");
                 case "delete":
-                    ARRAY_STORAGE.delete(uuid);
+                    if (uuid == null) {
+                        System.out.println("Incorrect input \n" + "example: delete uuid ");
+                        break;
+                    }
+                    try {
+                        ARRAY_STORAGE.delete(uuid);
+                        System.out.println("Resume with " + uuid + " is deleted");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Delete isn't possible - " + e.getMessage());
+                    }
                     printAll();
                     break;
                 case "get":
-                    System.out.println(ARRAY_STORAGE.get(uuid));
-                    break;
+                    if (uuid == null) {
+                        System.out.println("Incorrect input \n" + "example: get uuid ");
+                        break;
+                    }
+                    Resume resume = ARRAY_STORAGE.get(uuid);
+                    if (resume != null) {
+                        System.out.println(resume);
+                        break;
+                    }
+                    System.out.println("Resume isn't found");
                 case "clear":
                     ARRAY_STORAGE.clear();
                     printAll();
@@ -50,7 +71,7 @@ public class MainArray {
                 case "exit":
                     return;
                 default:
-                    System.out.println("Неверная команда.");
+                    System.out.println("Incorrect input");
                     break;
             }
         }
