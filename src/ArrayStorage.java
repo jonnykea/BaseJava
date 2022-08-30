@@ -5,24 +5,15 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     private final static int NUM_OF_RESUMES = 1000;
-    private int resumeCount;
+    private int countResumes;
     Resume[] storage = new Resume[NUM_OF_RESUMES];
 
-    public ArrayStorage() {
-        storage[resumeCount++] = new Resume("uuid1");
-        storage[resumeCount++] = new Resume("uuid2");
-        storage[resumeCount++] = new Resume("uuid3");
-    }
-
     void clear() {
-        for (int i = 0; i < storage.length; i++) {
-            storage[i] = null;
-            resumeCount = 0;
-        }
+            countResumes = 0;
     }
 
     void save(Resume r) {
-        storage[resumeCount++] = r;
+        storage[countResumes++] = r;
     }
 
     Resume get(String uuid) {
@@ -38,28 +29,24 @@ public class ArrayStorage {
         if (index < 0) {
             throw new IllegalArgumentException("Resume isn't found");
         }
-        resumeCount--;
-        System.arraycopy(storage, index + 1, storage, index, resumeCount - index);
-        storage[resumeCount] = null;
+        countResumes--;
+        System.arraycopy(storage, index + 1, storage, index, countResumes - index);
+        storage[countResumes] = null;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        return Arrays.copyOf(storage, resumeCount);
+        return Arrays.copyOf(storage, countResumes);
     }
 
     int size() {
-        return resumeCount;
-    }
-
-    public boolean isFull() {
-        return resumeCount >= 1000;
+        return countResumes;
     }
 
     private int findIndex(String resume) {
-        for (int i = 0; i < resumeCount; i++) {
+        for (int i = 0; i < countResumes; i++) {
             if (resume.equals(storage[i].uuid.toLowerCase())) {
                 return i;
             }

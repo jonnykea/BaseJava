@@ -30,7 +30,6 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    if (!ARRAY_STORAGE.isFull()) {
                         if (uuid == null) {
                             System.out.println("Incorrect input \n" + "example: save uuid ");
                             break;
@@ -38,8 +37,6 @@ public class MainArray {
                         ARRAY_STORAGE.save(new Resume(uuid));
                         printAll();
                         break;
-                    }
-                    System.out.println("There isn't place to save");
                 case "delete":
                     if (uuid == null) {
                         System.out.println("Incorrect input \n" + "example: delete uuid ");
