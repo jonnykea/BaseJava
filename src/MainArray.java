@@ -1,4 +1,5 @@
 import com.urise.webapp.model.Resume;
+
 import com.urise.webapp.storage.ArrayStorage;
 
 import java.io.BufferedReader;
@@ -6,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for com.u_rise.webbapp.storage.ArrayStorage implementation
+ * Interactive test for com.u_rise.webapp.storage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {
@@ -16,7 +17,7 @@ public class MainArray {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
-            System.out.print("Press of command for execution - (list | size | save uuid | delete uuid | get uuid | clear | exit): ");
+            System.out.print("Press of command for execution - " + "(list | size | update uuid | save uuid | delete uuid | get uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
             if (params.length < 1 || params.length > 2) {
                 System.out.println("Incorrect input");
@@ -33,16 +34,30 @@ public class MainArray {
                 case "size":
                     System.out.println(ARRAY_STORAGE.size());
                     break;
-                case "save":
-                        if (uuid == null) {
-                            System.out.println("Incorrect input \n" + "example: save uuid ");
-                            break;
-                        }
-                        r = new Resume();
-                        r.setUuid(uuid);
-                        ARRAY_STORAGE.save(r);
-                        printAll();
+                case "update":
+                    if (uuid == null) {
+                        System.out.println("Incorrect input \n" + "example: update uuid ");
                         break;
+                    }
+                    Resume updateResume = ARRAY_STORAGE.get(uuid);
+                    if (updateResume != null) {
+                        System.out.println("Input new uuid");
+                        String updateUuid = reader.readLine().trim().toLowerCase();
+                        ARRAY_STORAGE.update(updateResume, updateUuid);
+                        break;
+                    }
+                    System.out.println("Resume isn't found");
+                    break;
+                case "save":
+                    if (uuid == null) {
+                        System.out.println("Incorrect input \n" + "example: save uuid ");
+                        break;
+                    }
+                    r = new Resume();
+                    r.setUuid(uuid);
+                    ARRAY_STORAGE.save(r);
+                    printAll();
+                    break;
                 case "delete":
                     if (uuid == null) {
                         System.out.println("Incorrect input \n" + "example: delete uuid ");
@@ -50,7 +65,7 @@ public class MainArray {
                     }
                     try {
                         ARRAY_STORAGE.delete(uuid);
-                        System.out.println("com.u_rise.webbapp.model.Resume with " + uuid + " is deleted");
+                        System.out.println("Resume with " + uuid + " is deleted");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Delete isn't possible - " + e.getMessage());
                     }
@@ -66,7 +81,7 @@ public class MainArray {
                         System.out.println(resume);
                         break;
                     }
-                    System.out.println("com.u_rise.webbapp.model.Resume isn't found");
+                    System.out.println("Resume isn't found");
                 case "clear":
                     ARRAY_STORAGE.clear();
                     printAll();

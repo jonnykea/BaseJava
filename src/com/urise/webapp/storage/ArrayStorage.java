@@ -10,18 +10,31 @@ import java.util.Arrays;
 public class ArrayStorage {
     private final static int NUM_OF_RESUMES = 1000;
     private int countResumes;
-    private Resume[] storage = new Resume[NUM_OF_RESUMES];
+    private final Resume[] storage = new Resume[NUM_OF_RESUMES];
 
     public void clear() {
+        Arrays.fill(storage, 0, countResumes, null);
         countResumes = 0;
     }
 
     public void save(Resume r) {
-        storage[countResumes++] = r;
+        if (!isFull()) {
+            if (get(r.getUuid()) == null) {
+                storage[countResumes++] = r;
+            } else {
+                System.out.println("Resume have already existed");
+            }
+        } else {
+            System.out.println("There isn't place to save");
+        }
+    }
+
+    public void update(Resume r, String updateUuid) {
+        r.setUuid(updateUuid);
     }
 
     public Resume get(String uuid) {
-        int index = findIndex(uuid);
+        int index = getIndex(uuid);
         if (index >= 0) {
             return storage[index];
         }
@@ -29,9 +42,9 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        int index = findIndex(uuid);
+        int index = getIndex(uuid);
         if (index < 0) {
-            throw new IllegalArgumentException("com.u_rise.webbapp.model.Resume isn't found");
+            throw new IllegalArgumentException("Resume isn't found");
         }
         countResumes--;
         System.arraycopy(storage, index + 1, storage, index, countResumes - index);
@@ -49,7 +62,11 @@ public class ArrayStorage {
         return countResumes;
     }
 
-    private int findIndex(String resume) {
+    public boolean isFull() {
+        return countResumes >= NUM_OF_RESUMES;
+    }
+
+    private int getIndex(String resume) {
         for (int i = 0; i < countResumes; i++) {
             if (resume.equals(storage[i].getUuid().toLowerCase())) {
                 return i;
