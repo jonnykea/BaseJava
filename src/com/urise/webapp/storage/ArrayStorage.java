@@ -1,3 +1,7 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 /**
@@ -6,17 +10,17 @@ import java.util.Arrays;
 public class ArrayStorage {
     private final static int NUM_OF_RESUMES = 1000;
     private int countResumes;
-    Resume[] storage = new Resume[NUM_OF_RESUMES];
+    private Resume[] storage = new Resume[NUM_OF_RESUMES];
 
-    void clear() {
-            countResumes = 0;
+    public void clear() {
+        countResumes = 0;
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
         storage[countResumes++] = r;
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         int index = findIndex(uuid);
         if (index >= 0) {
             return storage[index];
@@ -24,10 +28,10 @@ public class ArrayStorage {
         return null;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         int index = findIndex(uuid);
         if (index < 0) {
-            throw new IllegalArgumentException("Resume isn't found");
+            throw new IllegalArgumentException("com.u_rise.webbapp.model.Resume isn't found");
         }
         countResumes--;
         System.arraycopy(storage, index + 1, storage, index, countResumes - index);
@@ -41,13 +45,13 @@ public class ArrayStorage {
         return Arrays.copyOf(storage, countResumes);
     }
 
-    int size() {
+    public int size() {
         return countResumes;
     }
 
     private int findIndex(String resume) {
         for (int i = 0; i < countResumes; i++) {
-            if (resume.equals(storage[i].uuid.toLowerCase())) {
+            if (resume.equals(storage[i].getUuid().toLowerCase())) {
                 return i;
             }
         }

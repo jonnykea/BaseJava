@@ -1,9 +1,12 @@
+import com.urise.webapp.model.Resume;
+import com.urise.webapp.storage.ArrayStorage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for ArrayStorage implementation
+ * Interactive test for com.u_rise.webbapp.storage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {
@@ -11,6 +14,7 @@ public class MainArray {
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Resume r;
         while (true) {
             System.out.print("Press of command for execution - (list | size | save uuid | delete uuid | get uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
@@ -34,7 +38,9 @@ public class MainArray {
                             System.out.println("Incorrect input \n" + "example: save uuid ");
                             break;
                         }
-                        ARRAY_STORAGE.save(new Resume(uuid));
+                        r = new Resume();
+                        r.setUuid(uuid);
+                        ARRAY_STORAGE.save(r);
                         printAll();
                         break;
                 case "delete":
@@ -44,7 +50,7 @@ public class MainArray {
                     }
                     try {
                         ARRAY_STORAGE.delete(uuid);
-                        System.out.println("Resume with " + uuid + " is deleted");
+                        System.out.println("com.u_rise.webbapp.model.Resume with " + uuid + " is deleted");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Delete isn't possible - " + e.getMessage());
                     }
@@ -60,7 +66,7 @@ public class MainArray {
                         System.out.println(resume);
                         break;
                     }
-                    System.out.println("Resume isn't found");
+                    System.out.println("com.u_rise.webbapp.model.Resume isn't found");
                 case "clear":
                     ARRAY_STORAGE.clear();
                     printAll();
