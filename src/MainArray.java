@@ -39,14 +39,10 @@ public class MainArray {
                         System.out.println("Incorrect input \n" + "example: update uuid ");
                         break;
                     }
-                    Resume updateResume = ARRAY_STORAGE.get(uuid);
-                    if (updateResume != null) {
-                        System.out.println("Input new uuid");
-                        String updateUuid = reader.readLine().trim().toLowerCase();
-                        ARRAY_STORAGE.update(updateResume, updateUuid);
-                        break;
-                    }
-                    System.out.println("Resume isn't found");
+                    r = new Resume();
+                    r.setUuid(uuid);
+                    ARRAY_STORAGE.update(r);
+                    printAll();
                     break;
                 case "save":
                     if (uuid == null) {
@@ -82,6 +78,7 @@ public class MainArray {
                         break;
                     }
                     System.out.println("Resume isn't found");
+                    break;
                 case "clear":
                     ARRAY_STORAGE.clear();
                     printAll();

@@ -18,27 +18,30 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        if (!isFull()) {
-            if (get(r.getUuid()) == null) {
-                storage[countResumes++] = r;
-            } else {
-                System.out.println("Resume have already existed");
-            }
-        } else {
+        if (isFull()) {
             System.out.println("There isn't place to save");
+        } else if (getIndex(r.getUuid()) > 0) {
+            System.out.println("Resume have already existed");
+        } else {
+            storage[countResumes++] = r;
         }
     }
 
-    public void update(Resume r, String updateUuid) {
-        r.setUuid(updateUuid);
+    public void update(Resume r) {
+        int index = getIndex(r.getUuid());
+        if (index < 0) {
+            System.out.println("Resume isn't found");
+        } else {
+            storage[index] = r;
+        }
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
-            return storage[index];
+        if (index < 0) {
+            return null;
         }
-        return null;
+        return storage[index];
     }
 
     public void delete(String uuid) {
