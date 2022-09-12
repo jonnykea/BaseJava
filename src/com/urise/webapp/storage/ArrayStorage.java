@@ -49,9 +49,9 @@ public class ArrayStorage {
         if (index < 0) {
             throw new IllegalArgumentException("Resume isn't found");
         }
+        storage[index] = storage[countResumes - 1];
+        storage[countResumes - 1] = null;
         countResumes--;
-        System.arraycopy(storage, index + 1, storage, index, countResumes - index);
-        storage[countResumes] = null;
     }
 
     /**
