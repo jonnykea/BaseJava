@@ -7,23 +7,23 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage implements Storage {
+public class ArrayStorage extends AbstractArrayStorage {
     private final static int STORAGE_LIMIT = 1000;
-    private int countResumes;
+    private int size;
     private final Resume[] storage = new Resume[STORAGE_LIMIT];
 
     public void clear() {
-        Arrays.fill(storage, 0, countResumes, null);
-        countResumes = 0;
+        Arrays.fill(storage, 0, size, null);
+        size = 0;
     }
 
     public void save(Resume r) {
-        if (isFull()) {
+        if (size == STORAGE_LIMIT) {
             System.out.println("There isn't place to save");
         } else if (getIndex(r.getUuid()) > 0) {
             System.out.println("Resume have already existed");
         } else {
-            storage[countResumes++] = r;
+            storage[size++] = r;
         }
     }
 
@@ -36,42 +36,26 @@ public class ArrayStorage implements Storage {
         }
     }
 
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            return null;
-        }
-        return storage[index];
-    }
-
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             throw new IllegalArgumentException("Resume isn't found");
         }
-        storage[index] = storage[countResumes - 1];
-        storage[countResumes - 1] = null;
-        countResumes--;
+        storage[index] = storage[size - 1];
+        storage[size - 1] = null;
+        size--;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        return Arrays.copyOf(storage, countResumes);
+        return Arrays.copyOf(storage, size);
     }
 
-    public int size() {
-        return countResumes;
-    }
-
-    public boolean isFull() {
-        return countResumes >= STORAGE_LIMIT;
-    }
-
-    private int getIndex(String resume) {
-        for (int i = 0; i < countResumes; i++) {
-            if (resume.equals(storage[i].getUuid().toLowerCase())) {
+    protected int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
                 return i;
             }
         }

@@ -24,5 +24,4 @@ public interface Storage {
 
     int size();
 
-    boolean isFull();
 }
