@@ -7,10 +7,10 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private final static int NUM_OF_RESUMES = 1000;
+public class ArrayStorage implements Storage {
+    private final static int STORAGE_LIMIT = 1000;
     private int countResumes;
-    private final Resume[] storage = new Resume[NUM_OF_RESUMES];
+    private final Resume[] storage = new Resume[STORAGE_LIMIT];
 
     public void clear() {
         Arrays.fill(storage, 0, countResumes, null);
@@ -66,7 +66,7 @@ public class ArrayStorage {
     }
 
     public boolean isFull() {
-        return countResumes >= NUM_OF_RESUMES;
+        return countResumes >= STORAGE_LIMIT;
     }
 
     private int getIndex(String resume) {
