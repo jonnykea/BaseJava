@@ -7,29 +7,14 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public void save(Resume r) {
-
-    }
-
-    @Override
-    public void update(Resume r) {
-
-    }
-
-    @Override
     public void delete(String uuid) {
-
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return new Resume[0];
-
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new IllegalArgumentException("Resume isn't found");
+        }
+        size--;
+        System.arraycopy(storage, index + 1, storage, index, size - index);
+        storage[size] = null;
     }
 
     @Override
