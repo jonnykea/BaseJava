@@ -13,11 +13,11 @@ public abstract class AbstractArrayStorage implements Storage {
     protected int size;
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
 
-    public int size() {
+    public final int size() {
         return size;
     }
 
-    public void update(Resume r) {
+    public final void update(Resume r) {
         int index = getIndex(r.getUuid());
         if (index < 0) {
             System.out.println("Resume isn't found");
@@ -26,19 +26,25 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public void save(Resume r) {
+    public final void save(Resume r) {
         if (size == STORAGE_LIMIT) {
             System.out.println("There isn't place to save");
-        } else if (getIndex(r.getUuid()) > 0) {
-            System.out.println("Resume have already existed");
+        } else if (getIndex(r.getUuid()) >= 0) {
+            System.out.println("Resume already exist");
         } else {
             storage[size++] = r;
         }
     }
 
-    public abstract void delete(String uuid);
+    public final void delete(String uuid){
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new IllegalArgumentException("Resume isn't found");
+        }
+        deleteElement(index);
+    }
 
-    public Resume get(String uuid) {
+    public final Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             return null;
@@ -46,14 +52,16 @@ public abstract class AbstractArrayStorage implements Storage {
         return storage[index];
     }
 
-    public void clear() {
+    public final void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    public Resume[] getAll() {
+    public final Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
+
+    protected abstract void deleteElement(int index);
 
     protected abstract int getIndex(String uuid);
 }

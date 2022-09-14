@@ -7,11 +7,7 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new IllegalArgumentException("Resume isn't found");
-        }
+    protected void deleteElement(int index){
         size--;
         System.arraycopy(storage, index + 1, storage, index, size - index);
         storage[size] = null;

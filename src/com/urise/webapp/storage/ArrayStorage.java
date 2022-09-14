@@ -6,11 +6,7 @@ package com.urise.webapp.storage;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new IllegalArgumentException("Resume isn't found");
-        }
+    public void deleteElement(int index) {
         storage[index] = storage[size - 1];
         storage[size - 1] = null;
         size--;
