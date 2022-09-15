@@ -8,9 +8,15 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void deleteElement(int index){
-        size--;
-        System.arraycopy(storage, index + 1, storage, index, size - index);
-        storage[size] = null;
+        System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
+        storage[size - 1] = null;
+    }
+
+    @Override
+    protected void saveElement(Resume r) {
+        int insertionPoint = (getIndex(r.getUuid()) + 1) * -1;
+        System.arraycopy(storage, insertionPoint, storage, insertionPoint + 1, size - insertionPoint);
+        storage[insertionPoint] = r;
     }
 
     @Override
