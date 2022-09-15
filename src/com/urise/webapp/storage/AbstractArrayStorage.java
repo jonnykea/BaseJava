@@ -32,7 +32,7 @@ public abstract class AbstractArrayStorage implements Storage {
         } else if (getIndex(r.getUuid()) >= 0) {
             System.out.println("Resume already exist");
         } else {
-            saveElement(r);
+            saveResume(r);
             size++;
         }
     }
@@ -42,7 +42,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index < 0) {
             throw new IllegalArgumentException("Resume isn't found");
         }
-        deleteElement(index);
+        deleteResume(index);
         size--;
     }
 
@@ -63,9 +63,9 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOf(storage, size);
     }
 
-    protected abstract void deleteElement(int index);
+    protected abstract void deleteResume(int index);
 
-    protected abstract void saveElement(Resume r);
+    protected abstract void saveResume(Resume r);
 
     protected abstract int getIndex(String uuid);
 }

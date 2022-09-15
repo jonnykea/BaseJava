@@ -7,13 +7,13 @@ import java.util.Arrays;
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected void deleteElement(int index){
+    protected void deleteResume(int index){
         System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
         storage[size - 1] = null;
     }
 
     @Override
-    protected void saveElement(Resume r) {
+    protected void saveResume(Resume r) {
         int insertionPoint = (getIndex(r.getUuid()) + 1) * -1;
         System.arraycopy(storage, insertionPoint, storage, insertionPoint + 1, size - insertionPoint);
         storage[insertionPoint] = r;
