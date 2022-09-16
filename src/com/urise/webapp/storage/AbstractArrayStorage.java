@@ -43,6 +43,7 @@ public abstract class AbstractArrayStorage implements Storage {
             throw new IllegalArgumentException("Resume isn't found");
         }
         deleteResume(index);
+        storage[size - 1] = null;
         size--;
     }
 
