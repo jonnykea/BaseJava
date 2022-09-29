@@ -73,13 +73,12 @@ abstract class AbstractArrayStorageTest {
         storage.clear();
         try {
             for (int i = 0; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                String test = "uuid" + i;
-                storage.save(new Resume(test));
+                storage.save(new Resume());
             }
         } catch (StorageException e) {
             Assert.fail("Overflow occurred earlier than it was planed");
         }
-        storage.save(new Resume("test"));
+        storage.save(new Resume());
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -118,6 +117,7 @@ abstract class AbstractArrayStorageTest {
     public void getAll() throws Exception {
         Resume[] expected = {RESUME_1, RESUME_2, RESUME_3};
         Resume[] test = storage.getAll();
+        assertSize(test.length);
         Assert.assertArrayEquals(expected, test);
     }
 

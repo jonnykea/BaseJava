@@ -1,8 +1,6 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
-import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -10,7 +8,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage {
     protected final static int STORAGE_LIMIT = 10000;
 
     protected int size;
@@ -29,25 +27,11 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public final void save(Resume r) {
-        if (size == STORAGE_LIMIT) {
-            throw new StorageException("Storage overflow", r.getUuid());
-        } else if (getIndex(r.getUuid()) >= 0) {
-            throw new ExistStorageException(r.getUuid());
-        } else {
-            saveResume(r);
-            size++;
-        }
-    }
-
     public final void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
+        if (!contains(new Resume(uuid))) {
             throw new NotExistStorageException(uuid);
         }
-        deleteResume(index);
-        storage[size - 1] = null;
-        size--;
+        deleteResume(uuid);
     }
 
     public final Resume get(String uuid) {
@@ -55,7 +39,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         }
-        return storage[index];
+        return returnResume(uuid);
     }
 
     public final void clear() {
@@ -72,4 +56,31 @@ public abstract class AbstractArrayStorage implements Storage {
     protected abstract void saveResume(Resume r);
 
     protected abstract int getIndex(String uuid);
+
+    protected final boolean isOverFlow() {
+        return size == STORAGE_LIMIT;
+    }
+
+    protected final boolean contains(Resume r) {
+        return getIndex(r.getUuid()) > -1;
+    }
+
+    protected final void store(Resume r) {
+        saveResume(r);
+        size++;
+    }
+
+    protected void deleteResume(String uuid) {
+        deleteResume(getIndex(uuid));
+        storage[size - 1] = null;
+        size--;
+    }
+
+    protected Resume returnResume(String uuid) {
+        return storage[getIndex(uuid)];
+    }
+
+    protected void updateResume(Resume r) {
+        storage[getIndex(r.getUuid())] = r;
+    }
 }
