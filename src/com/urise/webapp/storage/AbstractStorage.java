@@ -33,7 +33,7 @@ public abstract class AbstractStorage implements Storage {
         if (!contains(r)) {
             throw new NotExistStorageException(r.getUuid());
         }
-        return returnResume(uuid);
+        return returnResume(r);
     }
 
     @Override
@@ -51,9 +51,9 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void store(Resume r);
 
-    protected abstract void deleteResume(String uuid);
+    protected abstract Resume returnResume(Resume r);
 
-    protected abstract Resume returnResume(String uuid);
+    protected abstract void deleteResume(String uuid);
 
     protected abstract void updateResume(Resume r);
 }

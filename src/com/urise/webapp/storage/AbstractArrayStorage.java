@@ -1,6 +1,5 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -16,30 +15,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     public final int size() {
         return size;
-    }
-
-    public final void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(r.getUuid());
-        } else {
-            storage[index] = r;
-        }
-    }
-
-    public final void delete(String uuid) {
-        if (!contains(new Resume(uuid))) {
-            throw new NotExistStorageException(uuid);
-        }
-        deleteResume(uuid);
-    }
-
-    public final Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return returnResume(uuid);
     }
 
     public final void clear() {
@@ -76,8 +51,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
     }
 
-    protected Resume returnResume(String uuid) {
-        return storage[getIndex(uuid)];
+    protected Resume returnResume(Resume r) {
+        return storage[getIndex(r.getUuid())];
     }
 
     protected void updateResume(Resume r) {
