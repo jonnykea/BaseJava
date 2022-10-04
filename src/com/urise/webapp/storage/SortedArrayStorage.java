@@ -12,14 +12,14 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void saveResume(Resume r) {
-        int insertionPoint = (getIndex(r.getUuid()) + 1) * -1;
+    protected void insertResume(Resume r) {
+        int insertionPoint = (getSearchKey(r.getUuid()) + 1) * -1;
         System.arraycopy(storage, insertionPoint, storage, insertionPoint + 1, size - insertionPoint);
         storage[insertionPoint] = r;
     }
 
     @Override
-    protected int getIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         Resume searchKey = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class ListStorage extends AbstractStorage {
-    List<Resume> listResume = new ArrayList<>();
+    private final List<Resume> listResume = new ArrayList<>();
 
     @Override
     public final int size() {
@@ -19,44 +19,43 @@ public class ListStorage extends AbstractStorage {
         listResume.clear();
     }
 
-    @Override
-    public Resume[] getAll() {
-        Resume[] array = new Resume[listResume.size()];
-        return listResume.toArray(array);
-    }
-
-    private int getIndex(Resume r) {
-        return listResume.indexOf(r);
+    public List<Resume> getAll() {
+        return new ArrayList<>(listResume);
     }
 
     @Override
-    protected final boolean isOverFlow() {
-        return false;
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < listResume.size(); i++) {
+            if (listResume.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return null;
     }
 
     @Override
-    protected final boolean contains(Resume r) {
-        return listResume.contains(r);
+    protected final boolean isExist(Object index) {
+        return index != null;
     }
 
     @Override
-    protected final void store(Resume r) {
+    protected final void doSave(Resume r) {
         listResume.add(r);
     }
 
     @Override
-    protected void deleteResume(String uuid) {
-        listResume.remove(new Resume(uuid));
+    protected void doDelete(String uuid) {
+        listResume.remove(getSearchKey(uuid).intValue());
     }
 
     @Override
-    protected Resume returnResume(Resume r) {
-        return listResume.get(getIndex(r));
+    protected Resume doGet(String uuid) {
+        return listResume.get(getSearchKey(uuid));
     }
 
     @Override
-    protected void updateResume(Resume r) {
-        listResume.set(getIndex(r), r);
+    protected void doUpdate(Resume r) {
+        listResume.set(getSearchKey(r.getUuid()), r);
     }
 }
 

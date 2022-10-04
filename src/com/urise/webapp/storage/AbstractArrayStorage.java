@@ -1,8 +1,10 @@
 package com.urise.webapp.storage;
 
+import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Array based storage for Resumes
@@ -22,40 +24,42 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    public final Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    public final List<Resume> getAll() {
+        return Arrays.asList(Arrays.copyOf(storage, size));
     }
 
-    protected abstract void deleteResume(int index);
-
-    protected abstract void saveResume(Resume r);
-
-    protected abstract int getIndex(String uuid);
-
-    protected final boolean isOverFlow() {
-        return size == STORAGE_LIMIT;
+    protected boolean isExist(Object index) {
+        return (Integer) index >= 0;
     }
 
-    protected final boolean contains(Resume r) {
-        return getIndex(r.getUuid()) > -1;
+    protected final void doSave(Resume r) {
+        if (isOverFlow()) {
+            throw new StorageException("Storage overflow", r.getUuid());
+        } else {
+            insertResume(r);
+            size++;
+        }
     }
 
-    protected final void store(Resume r) {
-        saveResume(r);
-        size++;
-    }
-
-    protected void deleteResume(String uuid) {
-        deleteResume(getIndex(uuid));
+    protected void doDelete(String uuid) {
+        deleteResume((Integer) getSearchKey(uuid));
         storage[size - 1] = null;
         size--;
     }
 
-    protected Resume returnResume(Resume r) {
-        return storage[getIndex(r.getUuid())];
+    protected Resume doGet(String uuid) {
+        return storage[(int) getSearchKey(uuid)];
     }
 
-    protected void updateResume(Resume r) {
-        storage[getIndex(r.getUuid())] = r;
+    protected void doUpdate(Resume r) {
+        storage[(int) getSearchKey(r.getUuid())] = r;
+    }
+
+    protected abstract void deleteResume(int index);
+
+    protected abstract void insertResume(Resume r);
+
+    protected final boolean isOverFlow() {
+        return size == STORAGE_LIMIT;
     }
 }

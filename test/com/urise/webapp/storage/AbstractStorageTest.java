@@ -3,9 +3,11 @@ package com.urise.webapp.storage;
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -95,16 +97,14 @@ public abstract class AbstractStorageTest {
     public void clear() throws Exception {
         storage.clear();
         assertSize(0);
-        Resume[] test = new Resume[0];
-        Assert.assertArrayEquals(test, storage.getAll());
     }
 
     @Test
     public void getAll() throws Exception {
-        Resume[] expected = {RESUME_1, RESUME_2, RESUME_3};
-        Resume[] test = storage.getAll();
-        assertSize(test.length);
-        Assert.assertArrayEquals(expected, test);
+        List<Resume> test = storage.getAll();
+        List<Resume> expected = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        assertSize(test.size());
+        assertEquals(expected, test);
     }
 
     public void assertSize(int size) {
