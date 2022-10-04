@@ -6,26 +6,26 @@ import java.util.*;
 
 
 public class MapStorage extends AbstractStorage {
-    private final Map<String, Resume> MapResume = new TreeMap<>();
+    private final Map<String, Resume> storage = new HashMap<>();
 
     @Override
     public final int size() {
-        return MapResume.size();
+        return storage.size();
     }
 
     @Override
     public List<Resume> getAll() {
-        return new ArrayList<>(MapResume.values());
+        return new ArrayList<>(storage.values());
     }
 
     @Override
     public final void clear() {
-        MapResume.clear();
+        storage.clear();
     }
 
     @Override
     protected Resume getSearchKey(String uuid) {
-        return MapResume.get(uuid);
+        return storage.get(uuid);
     }
 
     @Override
@@ -34,23 +34,22 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected final void doSave(Resume r) {
-        MapResume.put(r.getUuid(), r);
+    protected final void doSave(Resume r, Object searchKey) {
+        storage.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        MapResume.remove(uuid);
+    protected void doDelete(Object searchKey) {
+        storage.remove(((Resume) searchKey).getUuid());
     }
 
     @Override
-    protected Resume doGet(String uuid) {
-        return MapResume.get(uuid);
+    protected Resume doGet(Object searchKey) {
+        return (Resume) searchKey;
     }
 
     @Override
-    protected void doUpdate(Resume r) {
-        MapResume.put(r.getUuid(), r);
+    protected void doUpdate(Resume r, Object searchKey) {
+        storage.put(r.getUuid(), r);
     }
 }
-

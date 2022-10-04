@@ -32,32 +32,32 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return (Integer) index >= 0;
     }
 
-    protected final void doSave(Resume r) {
+    protected final void doSave(Resume r, Object searchKey) {
         if (isOverFlow()) {
             throw new StorageException("Storage overflow", r.getUuid());
         } else {
-            insertResume(r);
+            insertResume(r, (int) searchKey);
             size++;
         }
     }
 
-    protected void doDelete(String uuid) {
-        deleteResume((Integer) getSearchKey(uuid));
+    protected void doDelete(Object searchKey) {
+        deleteResume((int) searchKey);
         storage[size - 1] = null;
         size--;
     }
 
-    protected Resume doGet(String uuid) {
-        return storage[(int) getSearchKey(uuid)];
+    protected Resume doGet(Object searchKey) {
+        return storage[(int) searchKey];
     }
 
-    protected void doUpdate(Resume r) {
-        storage[(int) getSearchKey(r.getUuid())] = r;
+    protected void doUpdate(Resume r, Object searchKey) {
+        storage[(int) searchKey] = r;
     }
 
     protected abstract void deleteResume(int index);
 
-    protected abstract void insertResume(Resume r);
+    protected abstract void insertResume(Resume r, int index);
 
     protected final boolean isOverFlow() {
         return size == STORAGE_LIMIT;

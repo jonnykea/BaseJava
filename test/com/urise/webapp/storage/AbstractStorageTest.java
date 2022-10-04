@@ -3,6 +3,7 @@ package com.urise.webapp.storage;
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -104,7 +105,7 @@ public abstract class AbstractStorageTest {
         List<Resume> test = storage.getAll();
         List<Resume> expected = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
         assertSize(test.size());
-        assertEquals(expected, test);
+        Assert.assertTrue(test.containsAll(expected));
     }
 
     public void assertSize(int size) {

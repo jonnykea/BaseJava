@@ -8,51 +8,54 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public void save(Resume r) {
-        getExistingSearchKey(r.getUuid());
-        doSave(r);
+        Object searchKey = getNotExistingSearchKey(r.getUuid());
+        doSave(r, searchKey);
     }
 
     @Override
     public void update(Resume r) {
-        getNotExistingSearchKey(r.getUuid());
-        doUpdate(r);
+        Object searchKey = getExistingSearchKey(r.getUuid());
+        getExistingSearchKey(r.getUuid());
+        doUpdate(r, searchKey);
     }
 
     @Override
     public Resume get(String uuid) {
-        getNotExistingSearchKey(uuid);
-        return doGet(uuid);
+        Object searchKey = getExistingSearchKey(uuid);
+        return doGet(searchKey);
     }
 
     @Override
     public void delete(String uuid) {
-        getNotExistingSearchKey(uuid);
-        doDelete(uuid);
+        Object searchKey = getExistingSearchKey(uuid);
+        doDelete(searchKey);
     }
 
-    protected void getNotExistingSearchKey(String uuid) {
+    protected Object getExistingSearchKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
         if (!isExist(searchKey)) {
             throw new NotExistStorageException(uuid);
         }
+        return searchKey;
     }
 
-    protected void getExistingSearchKey(String uuid) {
+    protected Object getNotExistingSearchKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
         if (isExist(searchKey)) {
             throw new ExistStorageException(uuid);
         }
+        return searchKey;
     }
 
     protected abstract boolean isExist(Object searchKey);
 
     protected abstract Object getSearchKey(String uuid);
 
-    protected abstract void doSave(Resume r);
+    protected abstract void doSave(Resume r, Object searchKey);
 
-    protected abstract void doUpdate(Resume r);
+    protected abstract void doUpdate(Resume r, Object searchKey);
 
-    protected abstract Resume doGet(String uuid);
+    protected abstract Resume doGet(Object searchKey);
 
-    protected abstract void doDelete(String uuid);
+    protected abstract void doDelete(Object searchKey);
 }
