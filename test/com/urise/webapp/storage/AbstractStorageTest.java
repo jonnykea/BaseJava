@@ -3,11 +3,11 @@ package com.urise.webapp.storage;
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -26,10 +26,10 @@ public abstract class AbstractStorageTest {
     private static final String UUID_4 = "uuid4";
     private static final String UUID_NOT_EXIST = "dummy";
 
-    final Resume RESUME_1 = new Resume(UUID_1);
-    final Resume RESUME_2 = new Resume(UUID_2);
-    final Resume RESUME_3 = new Resume(UUID_3);
-    final Resume RESUME_4 = new Resume(UUID_4);
+    final Resume RESUME_1 = new Resume(UUID_1, "Jon");
+    final Resume RESUME_2 = new Resume(UUID_2, "Max");
+    final Resume RESUME_3 = new Resume(UUID_3, "Anna");
+    final Resume RESUME_4 = new Resume(UUID_4, "Andrew");
 
     @Before
     public void setUp() throws Exception {
@@ -46,7 +46,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        Resume test = new Resume(UUID_1);
+        Resume test = new Resume(UUID_1, "new Name");
         storage.update(test);
         Resume updateResume = storage.get(test.getUuid());
         assertSame(test, updateResume);
@@ -102,18 +102,18 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() throws Exception {
-        List<Resume> test = storage.getAll();
+        List<Resume> test = storage.getAllSorted();
         List<Resume> expected = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        Collections.sort(expected);
         assertSize(test.size());
-        Assert.assertTrue(test.containsAll(expected));
+        assertEquals(test, expected);
     }
 
     public void assertSize(int size) {
         assertEquals(size, storage.size());
     }
 
-    public void assertGet(Resume resume) {
-        Resume resumeTest = storage.get(resume.getUuid());
-        assertEquals(resume, resumeTest);
+    public void assertGet(Resume r) {
+        assertEquals(r, storage.get(r.getUuid()));
     }
 }

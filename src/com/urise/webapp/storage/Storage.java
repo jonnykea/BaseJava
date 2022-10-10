@@ -22,7 +22,7 @@ public interface Storage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    List<Resume> getAll();
+    List<Resume> getAllSorted();
 
     int size();
 
