@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListStorage extends AbstractStorage {
+public class ListStorage extends AbstractStorage<Integer> {
     private final List<Resume> listResume = new ArrayList<>();
 
     @Override
@@ -34,27 +34,27 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected final boolean isExist(Object index) {
+    protected final boolean isExist(Integer index) {
         return index != null;
     }
 
     @Override
-    protected final void doSave(Resume r, Object searchKey) {
+    protected final void doSave(Resume r, Integer searchKey) {
         listResume.add(r);
     }
 
     @Override
-    protected void doDelete(Object searchKey) {
-        listResume.remove((int) searchKey);
+    protected void doDelete(Integer searchKey) {
+        listResume.remove(searchKey.intValue());
     }
 
     @Override
-    protected Resume doGet(Object searchKey) {
-        return listResume.get((int) searchKey);
+    protected Resume doGet(Integer searchKey) {
+        return listResume.get(searchKey);
     }
 
     @Override
-    protected void doUpdate(Resume r, Object searchKey) {
+    protected void doUpdate(Resume r, Integer searchKey) {
         listResume.set((int) searchKey, r);
     }
 }

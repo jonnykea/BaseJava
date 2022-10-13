@@ -20,15 +20,15 @@ public class MainArray {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
-            System.out.print("Press of command for execution - " + "(list | size | update uuid | save uuid | delete uuid | get uuid | clear | exit): ");
+            System.out.print("Press of command for execution - " + "(list | size | update uuid fullName | save fullName | delete uuid | get uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
-            if (params.length < 1 || params.length > 2) {
+            if (params.length < 1 || params.length > 3) {
                 System.out.println("Incorrect input");
                 continue;
             }
-            String uuid = null;
-            if (params.length == 2) {
-                uuid = params[1].intern();
+            String param = null;
+            if (params.length > 1) {
+                param = params[1].intern();
             }
             switch (params[0]) {
                 case "list":
@@ -38,47 +38,21 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "update":
-                    if (uuid == null) {
-                        System.out.println("Incorrect input \n" + "example: update uuid ");
-                        break;
-                    }
-                    r = new Resume(uuid);
+                    r = new Resume(param, params[2]);
                     ARRAY_STORAGE.update(r);
                     printAll();
                     break;
                 case "save":
-                    if (uuid == null) {
-                        System.out.println("Incorrect input \n" + "example: save uuid ");
-                        break;
-                    }
-                    r = new Resume(uuid);
+                    r = new Resume(param);
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;
                 case "delete":
-                    if (uuid == null) {
-                        System.out.println("Incorrect input \n" + "example: delete uuid ");
-                        break;
-                    }
-                    try {
-                        ARRAY_STORAGE.delete(uuid);
-                        System.out.println("Resume with " + uuid + " is deleted");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Delete isn't possible - " + e.getMessage());
-                    }
+                    ARRAY_STORAGE.delete(param);
                     printAll();
                     break;
                 case "get":
-                    if (uuid == null) {
-                        System.out.println("Incorrect input \n" + "example: get uuid ");
-                        break;
-                    }
-                    Resume resume = ARRAY_STORAGE.get(uuid);
-                    if (resume != null) {
-                        System.out.println(resume);
-                        break;
-                    }
-                    System.out.println("Resume isn't found");
+                    System.out.println(ARRAY_STORAGE.get(param));
                     break;
                 case "clear":
                     ARRAY_STORAGE.clear();
