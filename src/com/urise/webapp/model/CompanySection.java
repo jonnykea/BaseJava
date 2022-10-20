@@ -4,16 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CompanySection extends Section {
+import static java.util.Objects.requireNonNull;
 
-    List<Company> company = new ArrayList<>();
+public class CompanySection extends AbstractSection {
+
+    private final List<Company> companies = new ArrayList<>();
 
     public CompanySection(Company... elements) {
-        company.addAll(Arrays.asList(elements));
+        requireNonNull(companies, "companies must not be null");
+        companies.addAll(Arrays.asList(elements));
     }
 
-    public List<Company> getCompany() {
-        return company;
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Company c : companies) {
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     @Override
@@ -23,20 +35,11 @@ public class CompanySection extends Section {
 
         CompanySection that = (CompanySection) o;
 
-        return company != null ? company.equals(that.company) : that.company == null;
+        return companies.equals(that.companies);
     }
 
     @Override
     public int hashCode() {
-        return company != null ? company.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Company c : company) {
-            sb.append(c);
-        }
-        return sb.toString();
+        return companies.hashCode();
     }
 }

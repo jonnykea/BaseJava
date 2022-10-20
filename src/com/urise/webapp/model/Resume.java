@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -8,12 +9,13 @@ import static java.util.Objects.requireNonNull;
 /**
  * Initial resume class
  */
-public class Resume extends Section implements Comparable<Resume>{
+public class Resume extends AbstractSection implements Comparable<Resume> {
     // Unique identifier
     private final String uuid;
     private String fullName;
-    private Map<SectionType, Section> sections;
-    private Map<ContactType, String> contacts;
+
+    private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -26,7 +28,7 @@ public class Resume extends Section implements Comparable<Resume>{
         this.fullName = fullName;
     }
 
-    public Resume(String uuid, String fullName, Map<SectionType, Section> sections, Map<ContactType, String> contacts) {
+    public Resume(String uuid, String fullName, Map<SectionType, AbstractSection> sections, Map<ContactType, String> contacts) {
         requireNonNull(uuid, "uuid must not be null");
         requireNonNull(fullName, "fullName must not be null");
         requireNonNull(sections, "sections must not be null");
@@ -47,6 +49,14 @@ public class Resume extends Section implements Comparable<Resume>{
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getContacts(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public AbstractSection getContacts(SectionType type) {
+        return sections.get(type);
     }
 
     @Override

@@ -1,21 +1,25 @@
 package com.urise.webapp.model;
 
-public class TextSection extends Section {
+import static java.util.Objects.requireNonNull;
 
-    String text;
+public class TextSection extends AbstractSection {
+
+    private final String content;
 
     public TextSection(String text) {
-        this.text = text;
+        requireNonNull(text, "text must not be null");
+        this.content = text;
     }
 
-    public String getText() {
-        return text;
+    public String getContent() {
+        return content;
     }
 
     @Override
     public String toString() {
-        return "-  " + text + "\n";
+        return "-  " + content + "\n";
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -24,11 +28,11 @@ public class TextSection extends Section {
 
         TextSection that = (TextSection) o;
 
-        return text != null ? text.equals(that.text) : that.text == null;
+        return content.equals(that.content);
     }
 
     @Override
     public int hashCode() {
-        return text != null ? text.hashCode() : 0;
+        return content.hashCode();
     }
 }

@@ -1,19 +1,23 @@
 package com.urise.webapp.model;
 
 import java.util.List;
+import java.util.Objects;
 
-public class Company extends Section {
+public class Company extends AbstractSection {
 
     private final String name;
+    private final String website;
     private final List<Period> periods;
+
+    public Company(String name, String website, List<Period> periods) {
+        Link homePage = new Link(name, website);
+        this.name = name;
+        this.website = website;
+        this.periods = periods;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public Company(String name, List<Period> periods) {
-        this.name = name;
-        this.periods = periods;
     }
 
     public List<Period> getPeriods() {
@@ -23,7 +27,7 @@ public class Company extends Section {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(name).append("\n");
+        sb.append(name).append(" - ").append(website).append("\n");
         for (Period p : periods) {
             sb.append(p).append("\n");
         }
@@ -37,8 +41,8 @@ public class Company extends Section {
 
         Company company = (Company) o;
 
-        if (name != null ? !name.equals(company.name) : company.name != null) return false;
-        return periods != null ? periods.equals(company.periods) : company.periods == null;
+        if (!Objects.equals(name, company.name)) return false;
+        return Objects.equals(periods, company.periods);
     }
 
     @Override

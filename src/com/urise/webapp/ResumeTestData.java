@@ -59,13 +59,13 @@ public class ResumeTestData {
 //      experience at companies
         Period experience1 = new Period("10/2013", "Now", "Автор проекта.", "Создание, " +
                 "организация и проведение Java онлайн проектов и стажировок.");
-        Company Exp1 = new Company("Java Online Projects", Collections.singletonList(experience1));
+        Company Exp1 = new Company("Java Online Projects", "link", Collections.singletonList(experience1));
 
         Period experience2 = new Period("10/2014", "01/2016", "Старший разработчик (backend)",
                 "Проектирование и разработка " +
                         "онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, " +
                         "PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.");
-        Company Exp2 = new Company("Wrike", Collections.singletonList(experience2));
+        Company Exp2 = new Company("Wrike", "link", Collections.singletonList(experience2));
 
         Period experience3 = new Period("04/2012", "10/2014", "Java архитектор",
                 "Организация процесса " +
@@ -76,7 +76,7 @@ public class ResumeTestData {
                         "для online редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache " +
                         "Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix " +
                         "shell remote scripting via ssh tunnels, PL/Python");
-        Company Exp3 = new Company("RIT Center", Collections.singletonList(experience3));
+        Company Exp3 = new Company("RIT Center","link", Collections.singletonList(experience3));
 
         Period experience4 = new Period("12/2010", "04/2012", "Ведущий программист",
                 "Участие в проекте Deutsche " +
@@ -84,68 +84,68 @@ public class ResumeTestData {
                         " клиентской и серверной части CRM. Реализация RIA-приложения для администрирования, мониторинга и" +
                         " анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), " +
                         "Highstock, Commet, HTML5.");
-        Company Exp4 = new Company("Luxoft (Deutsche Bank)", Collections.singletonList(experience4));
+        Company Exp4 = new Company("Luxoft (Deutsche Bank)","link", Collections.singletonList(experience4));
 
         Period experience5 = new Period("06/2008", "12/2010", "Ведущий программист",
                 "Дизайн и имплементация " +
                         "Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, " +
                         "Servlet 2.4, JSP, JMX, JMS, Maven2). Реализация администрирования, статистики и мониторинга фреймворка. " +
                         "Разработка online JMX клиента (Python/ Jython, Django, ExtJS)");
-        Company Exp5 = new Company("Yota", Collections.singletonList(experience5));
+        Company Exp5 = new Company("Yota","link", Collections.singletonList(experience5));
 
         Period experience6 = new Period("03/2007", "06/2008", "Разработчик ПО",
                 "Реализация клиентской " +
                         "(Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения" +
                         " (OLAP, Data mining).");
-        Company Exp6 = new Company("Enkata", Collections.singletonList(experience6));
+        Company Exp6 = new Company("Enkata","link", Collections.singletonList(experience6));
 
         Period experience7 = new Period("01/2005", "02/2007", "Разработчик ПО",
                 "Разработка информационной " +
                         "модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage " +
                         "(Java, Unix).");
-        Company Exp7 = new Company("Siemens AG", Collections.singletonList(experience7));
+        Company Exp7 = new Company("Siemens AG","link", Collections.singletonList(experience7));
 
         Period experience8 = new Period("09/1997", "01/2005",
                 "Инженер по аппаратному и программному тестированию", "Тестирование, отладка, " +
                 "внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM).");
-        Company Exp8 = new Company("Alcatel", Collections.singletonList(experience8));
+        Company Exp8 = new Company("Alcatel","link", Collections.singletonList(experience8));
 
         CompanySection companiesExp = new CompanySection(Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7, Exp8);
 
 //      education at institutions
         Period education1 = new Period("03/2013", "05/2013", "'Functional Programming P" +
                 "principles in Scala' by Martin Odersky");
-        Company Educ1 = new Company("Coursera", Collections.singletonList(education1));
+        Company Educ1 = new Company("Coursera","link", Collections.singletonList(education1));
 
         Period education2 = new Period("03/2011", "04/2011", "Курс 'Объектно-ориентированный " +
                 "анализ ИС. Концептуальное моделирование на UML.");
-        Company Educ2 = new Company("Luxoft", Collections.singletonList(education2));
+        Company Educ2 = new Company("Luxoft","link", Collections.singletonList(education2));
 
         Period education3 = new Period("01/2005", "04/2005", "3 месяца обучения мобильным " +
                 "IN сетям (Берлин)");
-        Company Educ3 = new Company("Siemens AG", Collections.singletonList(education3));
+        Company Educ3 = new Company("Siemens AG","link", Collections.singletonList(education3));
 
         Period education4 = new Period("09/1997", "03/1998", "6 месяцев обучения цифровым " +
                 "телефонным сетям (Москва)");
-        Company Educ4 = new Company("Alcatel", Collections.singletonList(education4));
+        Company Educ4 = new Company("Alcatel","link", Collections.singletonList(education4));
 
         Period education5 = new Period("09/1993", "07/1996", "Аспирантура " +
                 "(программист С, С++)");
         Company Educ5 = new Company("Санкт-Петербургский национальный исследовательский университет информационных" +
-                " технологий, механики и оптики", Collections.singletonList(education5));
+                " технологий, механики и оптики","link", Collections.singletonList(education5));
 
         Period education6 = new Period("09/1987", "07/1993",
                 "Инженер (программист Fortran, C)");
         Company Educ6 = new Company("Санкт-Петербургский национальный исследовательский университет информационных" +
-                " технологий, механики и оптики", Collections.singletonList(education6));
+                " технологий, механики и оптики","link", Collections.singletonList(education6));
 
         Period education7 = new Period("09/1984", "06/1987", "Закончил с отличием");
-        Company Educ7 = new Company("Заочная физико-техническая школа при МФТИ", Collections.singletonList(education7));
+        Company Educ7 = new Company("Заочная физико-техническая школа при МФТИ","link", Collections.singletonList(education7));
 
         CompanySection companiesEduc = new CompanySection(Educ1, Educ2, Educ3, Educ4, Educ5, Educ6, Educ7);
 
 
-        Map<SectionType, Section> sections = new HashMap<>();
+        Map<SectionType, AbstractSection> sections = new HashMap<>();
         sections.put(OBJECTIVE, objective);
         sections.put(PERSONAL, personal);
         sections.put(ACHIEVEMENT, achievement);

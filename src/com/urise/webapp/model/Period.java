@@ -1,5 +1,9 @@
 package com.urise.webapp.model;
 
+import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
+
 public class Period {
     private final String startDate;
     private final String endDate;
@@ -7,12 +11,18 @@ public class Period {
     private final String description;
 
     public Period(String startDate, String endDate, String description) {
+        requireNonNull(startDate, "startDate must not be null");
+        requireNonNull(endDate, "endDate must not be null");
+        requireNonNull(description, "description must not be null");
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
     }
 
     public Period(String startDate, String endDate, String position, String description) {
+        requireNonNull(startDate, "startDate must not be null");
+        requireNonNull(endDate, "endDate must not be null");
+        requireNonNull(description, "description must not be null");
         this.startDate = startDate;
         this.endDate = endDate;
         this.position = position;
@@ -36,29 +46,29 @@ public class Period {
     }
 
     @Override
+    public String toString() {
+        return startDate + "-" + endDate + "\n" + (position == null ? "" : position + "\n") + description + "\n";
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Period period = (Period) o;
 
-        if (startDate != null ? !startDate.equals(period.startDate) : period.startDate != null) return false;
-        if (endDate != null ? !endDate.equals(period.endDate) : period.endDate != null) return false;
-        if (position != null ? !position.equals(period.position) : period.position != null) return false;
-        return description != null ? description.equals(period.description) : period.description == null;
+        if (!startDate.equals(period.startDate)) return false;
+        if (!endDate.equals(period.endDate)) return false;
+        if (!Objects.equals(position, period.position)) return false;
+        return description.equals(period.description);
     }
 
     @Override
     public int hashCode() {
-        int result = startDate != null ? startDate.hashCode() : 0;
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        int result = startDate.hashCode();
+        result = 31 * result + endDate.hashCode();
         result = 31 * result + (position != null ? position.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + description.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return startDate + "-" + endDate + "\n" + (position == null ? "" : position + "\n") + description + "\n";
     }
 }

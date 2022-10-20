@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListSection extends Section {
+import static java.util.Objects.requireNonNull;
 
-    List<String> list = new ArrayList<>();
+public class ListSection extends AbstractSection {
+
+    private final List<String> items = new ArrayList<>();
 
     public ListSection(String... elements) {
-        list.addAll(Arrays.asList(elements));
+        requireNonNull(items, "items must not be null");
+        items.addAll(Arrays.asList(elements));
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (String s : list) {
+        for (String s : items) {
             sb.append("-  ").append(s).append("\n");
         }
         return sb + "\n";
@@ -28,11 +31,11 @@ public class ListSection extends Section {
 
         ListSection that = (ListSection) o;
 
-        return list != null ? list.equals(that.list) : that.list == null;
+        return items.equals(that.items);
     }
 
     @Override
     public int hashCode() {
-        return list != null ? list.hashCode() : 0;
+        return items.hashCode();
     }
 }
