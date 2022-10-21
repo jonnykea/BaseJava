@@ -1,16 +1,17 @@
 package com.urise.webapp.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
 public class Period {
-    private final String startDate;
-    private final String endDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
     private String position;
     private final String description;
 
-    public Period(String startDate, String endDate, String description) {
+    public Period(LocalDate startDate, LocalDate endDate, String description) {
         requireNonNull(startDate, "startDate must not be null");
         requireNonNull(endDate, "endDate must not be null");
         requireNonNull(description, "description must not be null");
@@ -19,7 +20,7 @@ public class Period {
         this.description = description;
     }
 
-    public Period(String startDate, String endDate, String position, String description) {
+    public Period(LocalDate startDate, LocalDate endDate, String position, String description) {
         requireNonNull(startDate, "startDate must not be null");
         requireNonNull(endDate, "endDate must not be null");
         requireNonNull(description, "description must not be null");
@@ -29,11 +30,11 @@ public class Period {
         this.description = description;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -47,7 +48,7 @@ public class Period {
 
     @Override
     public String toString() {
-        return startDate + "-" + endDate + "\n" + (position == null ? "" : position + "\n") + description + "\n";
+        return startDate + " - " + endDate + "\n" + (position == null ? "" : position + "\n") + description + "\n";
     }
 
     @Override

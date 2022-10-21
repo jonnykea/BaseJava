@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Company extends AbstractSection {
-
     private final String name;
     private final String website;
     private final List<Period> periods;
@@ -29,9 +28,9 @@ public class Company extends AbstractSection {
         StringBuilder sb = new StringBuilder();
         sb.append(name).append(" - ").append(website).append("\n");
         for (Period p : periods) {
-            sb.append(p).append("\n");
+            sb.append(p);
         }
-        return sb.toString();
+        return sb + "\n";
     }
 
     @Override
