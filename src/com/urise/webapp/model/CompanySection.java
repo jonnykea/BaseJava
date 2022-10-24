@@ -4,15 +4,42 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CompanySection implements Section{
+import static java.util.Objects.requireNonNull;
 
-    List<Company> company = new ArrayList<>();
+public class CompanySection extends AbstractSection {
 
-    public CompanySection(Company... elements){
-        company.addAll(Arrays.asList(elements));
+    private final List<Company> companies = new ArrayList<>();
+
+    public CompanySection(Company... elements) {
+        requireNonNull(companies, "companies must not be null");
+        companies.addAll(Arrays.asList(elements));
     }
 
-    public List<Company> getCompany(){
-        return company;
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Company c : companies) {
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CompanySection that = (CompanySection) o;
+
+        return companies.equals(that.companies);
+    }
+
+    @Override
+    public int hashCode() {
+        return companies.hashCode();
     }
 }

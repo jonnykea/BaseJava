@@ -4,16 +4,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListSection implements Section {
+import static java.util.Objects.requireNonNull;
 
-    List<String> list = new ArrayList<>();
+public class ListSection extends AbstractSection {
 
-    public ListSection(String... elements){
-        list.addAll(Arrays.asList(elements));
+    private final List<String> items = new ArrayList<>();
+
+    public ListSection(String... elements) {
+        requireNonNull(items, "items must not be null");
+        items.addAll(Arrays.asList(elements));
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(list.toArray());
+        StringBuilder sb = new StringBuilder();
+        for (String s : items) {
+            sb.append("-  ").append(s).append("\n");
+        }
+        return sb + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ListSection that = (ListSection) o;
+
+        return items.equals(that.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return items.hashCode();
     }
 }
