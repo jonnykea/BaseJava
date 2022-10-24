@@ -1,25 +1,58 @@
 package com.urise.webapp.model;
 
-public class Company implements Section {
+import java.util.List;
+import java.util.Objects;
 
-    String name;
-    Period period;
-    String position;
+public class Company extends AbstractSection {
+    private final String name;
 
-    public Company(String name, Period period) {
+    private final String website;
+
+    private final List<Period> periods;
+
+    public Company(String name, String website, List<Period> periods) {
         this.name = name;
-        this.period = period;
+        this.website = website;
+        this.periods = periods;
     }
 
-    public Company(String name, String position, Period period) {
-        this.name = name;
-        this.position = position;
-        this.period = period;
+    public String getName() {
+        return name;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public List<Period> getPeriods() {
+        return periods;
     }
 
     @Override
     public String toString() {
-        return period + "\n" + name + "\n" +
-                position + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append(name).append(" - ").append(website).append("\n");
+        for (Period p : periods) {
+            sb.append(p);
+        }
+        return sb + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Company company = (Company) o;
+
+        if (!Objects.equals(name, company.name)) return false;
+        return Objects.equals(periods, company.periods);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (periods != null ? periods.hashCode() : 0);
+        return result;
     }
 }

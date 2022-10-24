@@ -55,6 +55,6 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doUpdate(Resume r, Integer searchKey) {
-        listResume.set((int) searchKey, r);
+        listResume.set(searchKey, r);
     }
 }
