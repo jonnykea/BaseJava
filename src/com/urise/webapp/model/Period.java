@@ -1,8 +1,12 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.DateUtil;
+
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Objects;
 
+import static com.urise.webapp.util.DateUtil.*;
 import static java.util.Objects.requireNonNull;
 
 public class Period {
@@ -10,6 +14,22 @@ public class Period {
     private final LocalDate endDate;
     private String position;
     private final String description;
+
+    public Period(int startYear, Month startMonth, String description) {
+        this(of(startYear, startMonth), NOW, description);
+    }
+
+    public Period(int startYear, Month startMonth, String position, String description) {
+        this(of(startYear, startMonth), NOW, position, description);
+    }
+
+    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String position, String description) {
+        this(of(startYear, startMonth), of(endYear, endMonth), position, description);
+    }
+
+    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String description) {
+        this(of(startYear, startMonth), of(endYear, endMonth), description);
+    }
 
     public Period(LocalDate startDate, LocalDate endDate, String description) {
         requireNonNull(startDate, "startDate must not be null");

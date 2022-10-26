@@ -51,12 +51,20 @@ public class Resume extends AbstractSection implements Comparable<Resume> {
         this.fullName = fullName;
     }
 
-    public String getContacts(ContactType type) {
+    public String getContact(ContactType type) {
         return contacts.get(type);
     }
 
-    public AbstractSection getContacts(SectionType type) {
+    public AbstractSection getSection(SectionType type) {
         return sections.get(type);
+    }
+
+    public void setContacts(Map<ContactType, String> contacts) {
+        this.contacts = contacts;
+    }
+
+    public void setSections(Map<SectionType, AbstractSection> sections) {
+        this.sections = sections;
     }
 
     @Override

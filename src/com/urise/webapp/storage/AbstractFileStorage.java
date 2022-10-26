@@ -58,7 +58,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         try {
             return doRead(file);
         } catch (IOException e) {
-            throw new StorageException("IO error", file.getName(), e);
+            throw new StorageException("IO error ", file.getName(), e);
         }
     }
 
@@ -73,15 +73,11 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected List<Resume> doCopyAll() {
         File[] files = directory.listFiles();
         if (files == null) {
-            throw new StorageException("directory is empty ", directory.getName());
+            throw new StorageException("IO error ", directory.getName());
         }
         List<Resume> list = new ArrayList<>();
         for (File f : files) {
-            try {
-                list.add(doRead(f));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            list.add(doGet(f));
         }
         return list;
     }
@@ -90,7 +86,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     public void clear() {
         File[] files = directory.listFiles();
         if (files == null) {
-            return;
+            throw new StorageException("IO error ", directory.getName());
         }
         for (File f : files) {
             doDelete(f);
@@ -101,7 +97,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     public int size() {
         File[] files = directory.listFiles();
         if (files == null) {
-            return 0;
+            throw new StorageException("IO error ", directory.getName());
         }
         return files.length;
     }

@@ -5,11 +5,12 @@ import java.util.Objects;
 
 public class Company extends AbstractSection {
     private final String name;
+
     private final String website;
+
     private final List<Period> periods;
 
     public Company(String name, String website, List<Period> periods) {
-        Link homePage = new Link(name, website);
         this.name = name;
         this.website = website;
         this.periods = periods;
@@ -17,6 +18,10 @@ public class Company extends AbstractSection {
 
     public String getName() {
         return name;
+    }
+
+    public String getWebsite() {
+        return website;
     }
 
     public List<Period> getPeriods() {
