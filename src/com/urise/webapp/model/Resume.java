@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.UUID;
@@ -9,7 +10,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * Initial resume class
  */
-public class Resume extends AbstractSection implements Comparable<Resume> {
+public class Resume extends AbstractSection implements Comparable<Resume>, Serializable {
+    private static final long serialVersionUID = 1L;
     // Unique identifier
     private final String uuid;
     private String fullName;
