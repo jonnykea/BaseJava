@@ -7,6 +7,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 public class CompanySection extends AbstractSection {
+    private static final long serialVersionUID = 1L;
 
     private final List<Company> companies = new ArrayList<>();
 

@@ -3,6 +3,7 @@ package com.urise.webapp.model;
 import static java.util.Objects.requireNonNull;
 
 public class TextSection extends AbstractSection {
+    private static final long serialVersionUID = 1L;
 
     private final String content;
 

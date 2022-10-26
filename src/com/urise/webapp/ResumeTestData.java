@@ -1,7 +1,6 @@
 package com.urise.webapp;
 
 import com.urise.webapp.model.*;
-import com.urise.webapp.util.DateUtil;
 
 import java.time.Month;
 import java.util.Arrays;
@@ -11,7 +10,6 @@ import java.util.Map;
 
 import static com.urise.webapp.model.ContactType.*;
 import static com.urise.webapp.model.SectionType.*;
-import static com.urise.webapp.util.DateUtil.NOW;
 
 public class ResumeTestData {
     public static void main(String[] args) {
@@ -63,7 +61,7 @@ public class ResumeTestData {
                 "английский \"upper intermediate");
 
 //      experience at companies
-        Period experience1 = new Period(2013, Month.OCTOBER,"Автор проекта.", "Создание, " +
+        Period experience1 = new Period(2013, Month.OCTOBER, "Автор проекта.", "Создание, " +
                 "организация и проведение Java онлайн проектов и стажировок.");
         Company Exp1 = new Company("Java Online Projects", "link", Collections.singletonList(experience1));
 
@@ -243,6 +241,6 @@ public class ResumeTestData {
         contacts.put(STACKOVERFLOW, "Reference");
         contacts.put(HOMEPAGE, "Reference");
 
-        return  new Resume(uuid, fullName, sections, contacts);
+        return new Resume(uuid, fullName, sections, contacts);
     }
 }
