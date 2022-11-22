@@ -30,27 +30,26 @@ public class MainFile {
             throw new RuntimeException(e);
         }
 
-        printAllSubFiles(dir);
+        printAllFiles(filePath, dir, 0);
 /*        System.out.println(calculate(3, 3));
         System.out.println(power(3, 3));*/
     }
 
-    private static void printAllSubFiles(File dir) {
-        File[] files = dir.listFiles();
-        if (files == null) {
+
+    private static void printAllFiles(String filePath, File dir, int indent) {
+        if (filePath == null) {
             return;
         }
-        boolean indent = false;
-        for (File file : files) {
-            if (file.isFile()) {
-                indent = true;
-                if (indent){
-                    System.out.print("  -  ");
-                }
-                System.out.println("File: " + file.getName());
-            } else if (file.isDirectory()) {
-                System.out.println("Directory: " + file.getName());
-                printAllSubFiles(file);
+        File[] files = dir.listFiles();
+        for (File element : files) {
+            for (int i = 0; i < indent; i++) {
+                System.out.print("    ");
+            }
+            if (element.isDirectory()) {
+                System.out.println("Directory: " + element.getName());
+                printAllFiles(filePath, element, indent + 1);
+            } else {
+                System.out.println("FileName " + element.getName());
             }
         }
     }
