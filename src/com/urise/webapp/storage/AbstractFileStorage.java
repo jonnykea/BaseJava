@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public abstract class AbstractFileStorage extends AbstractStorage<File> implements StorageStrategy {
     private final File directory;
 
     protected AbstractFileStorage(File directory) {
