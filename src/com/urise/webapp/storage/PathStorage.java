@@ -103,7 +103,7 @@ public class PathStorage extends AbstractStorage<Path> {
 
     Stream<Path> createStreamList() {
         try {
-           return Files.list(directory);
+            return Files.list(directory);
         } catch (IOException e) {
             throw new StorageException("Path access error", null);
         }

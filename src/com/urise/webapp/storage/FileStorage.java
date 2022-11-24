@@ -13,7 +13,7 @@ import static java.util.Objects.requireNonNull;
 public class FileStorage extends AbstractStorage<File> {
     private final File directory;
 
-    private StreamSerializerStrategy streamSerializerStrategy;
+    private final StreamSerializerStrategy streamSerializerStrategy;
 
     protected FileStorage(File directory, StreamSerializerStrategy streamSerializerStrategy) {
         requireNonNull(directory, "directory must not be null");

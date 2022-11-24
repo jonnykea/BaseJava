@@ -7,6 +7,3 @@ public class ObjectStreamPathStorageTest extends AbstractStorageTest {
         super(new PathStorage(STORAGE_DIR.toString(), new ObjectStreamSerializer()));
     }
 }
-
-
-

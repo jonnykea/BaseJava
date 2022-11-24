@@ -7,6 +7,3 @@ public class ObjectStreamFileStorageTest extends AbstractStorageTest {
         super(new FileStorage(STORAGE_DIR, new ObjectStreamSerializer()));
     }
 }
-
-
-
