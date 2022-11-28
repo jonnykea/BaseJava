@@ -1,5 +1,10 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -9,12 +14,18 @@ import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
 import static java.util.Objects.requireNonNull;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Period implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate startDate;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private LocalDate endDate;
     private String position;
-    private final String description;
+    private String description;
+
+    public Period() {
+    }
 
     public Period(int startYear, Month startMonth, String description) {
         this(of(startYear, startMonth), NOW, description);

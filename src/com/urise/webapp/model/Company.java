@@ -5,11 +5,14 @@ import java.util.Objects;
 
 public class Company extends AbstractSection {
     private static final long serialVersionUID = 1L;
-    private final String name;
+    private String name;
 
-    private final String website;
+    private String website;
 
-    private final List<Period> periods;
+    private List<Period> periods;
+
+    public Company() {
+    }
 
     public Company(String name, String website, List<Period> periods) {
         this.name = name;

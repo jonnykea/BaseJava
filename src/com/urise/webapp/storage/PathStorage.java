@@ -43,7 +43,7 @@ public class PathStorage extends AbstractStorage<Path> {
         try {
             Files.createFile(path);
         } catch (IOException e) {
-            throw new StorageException("Couldn't create Path " + path.toAbsolutePath(), path.getFileName().toString(), e);
+            throw new StorageException("Couldn't create path " + path.toAbsolutePath(), path.getFileName().toString(), e);
         }
         doUpdate(r, path);
     }
@@ -97,15 +97,14 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     public int size() {
-        long size = createStreamList().count();
-        return (int) size;
+        return (int) createStreamList().count();
     }
 
     Stream<Path> createStreamList() {
         try {
             return Files.list(directory);
         } catch (IOException e) {
-            throw new StorageException("Path access error", null);
+            throw new StorageException("Path access error", e);
         }
     }
 }

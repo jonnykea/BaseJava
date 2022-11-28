@@ -5,7 +5,10 @@ import static java.util.Objects.requireNonNull;
 public class TextSection extends AbstractSection {
     private static final long serialVersionUID = 1L;
 
-    private final String content;
+    private String content;
+
+    public TextSection() {
+    }
 
     public TextSection(String text) {
         requireNonNull(text, "text must not be null");

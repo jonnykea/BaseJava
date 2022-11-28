@@ -11,6 +11,9 @@ public class CompanySection extends AbstractSection {
 
     private final List<Company> companies = new ArrayList<>();
 
+    public CompanySection() {
+    }
+
     public CompanySection(Company... elements) {
         requireNonNull(companies, "companies must not be null");
         companies.addAll(Arrays.asList(elements));
