@@ -58,24 +58,32 @@ public class Resume extends AbstractSection implements Comparable<Resume>, Seria
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public Map<ContactType, String> getContacts() {
+        return contacts;
     }
 
     public String getContact(ContactType type) {
         return contacts.get(type);
     }
 
-    public AbstractSection getSection(SectionType type) {
-        return sections.get(type);
+    public Map<SectionType, AbstractSection> getSections() {
+        return sections;
     }
 
-    public void setContacts(Map<ContactType, String> contacts) {
-        this.contacts = contacts;
+    public String getSection(SectionType type) {
+        return contacts.get(type);
     }
 
-    public void setSections(Map<SectionType, AbstractSection> sections) {
-        this.sections = sections;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setContacts(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void setSections(SectionType type, AbstractSection section) {
+        sections.put(type, section);
     }
 
     @Override
