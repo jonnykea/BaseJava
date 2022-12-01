@@ -27,20 +27,20 @@ public class Period implements Serializable {
     public Period() {
     }
 
-    public Period(int startYear, Month startMonth, String description) {
-        this(of(startYear, startMonth), NOW, description);
+    public Period(int startYear, Month startMonth, int dayOfMonth, String description) {
+        this(of(startYear, startMonth, dayOfMonth), NOW, description);
     }
 
-    public Period(int startYear, Month startMonth, String position, String description) {
-        this(of(startYear, startMonth), NOW, position, description);
+    public Period(int startYear, Month startMonth, int dayOfMonth, String position, String description) {
+        this(of(startYear, startMonth, 1), NOW, position, description);
     }
 
-    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String position, String description) {
-        this(of(startYear, startMonth), of(endYear, endMonth), position, description);
+    public Period(int startYear, Month startMonth, int startDayOfMonth, int endYear, Month endMonth,  int endDayOfMonth, String position, String description) {
+        this(of(startYear, startMonth, startDayOfMonth), of(endYear, endMonth, endDayOfMonth), position, description);
     }
 
-    public Period(int startYear, Month startMonth, int endYear, Month endMonth, String description) {
-        this(of(startYear, startMonth), of(endYear, endMonth), description);
+    public Period(int startYear, Month startMonth, int startDayOfMonth, int endYear, Month endMonth, int endDayOfMonth, String description) {
+        this(of(startYear, startMonth, startDayOfMonth), of(endYear, endMonth, endDayOfMonth), description);
     }
 
     public Period(LocalDate startDate, LocalDate endDate, String description) {
