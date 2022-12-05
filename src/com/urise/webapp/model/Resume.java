@@ -16,14 +16,14 @@ import static java.util.Objects.requireNonNull;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Resume extends AbstractSection implements Comparable<Resume>, Serializable {
+public class Resume extends Section implements Comparable<Resume>, Serializable {
     private static final long serialVersionUID = 1L;
     // Unique identifier
     private String uuid;
     private String fullName;
 
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
-    private Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
+    private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume() {
     }
@@ -39,7 +39,7 @@ public class Resume extends AbstractSection implements Comparable<Resume>, Seria
         this.fullName = fullName;
     }
 
-    public Resume(String uuid, String fullName, Map<SectionType, AbstractSection> sections, Map<ContactType, String> contacts) {
+    public Resume(String uuid, String fullName, Map<SectionType, Section> sections, Map<ContactType, String> contacts) {
         requireNonNull(uuid, "uuid must not be null");
         requireNonNull(fullName, "fullName must not be null");
         requireNonNull(sections, "sections must not be null");
@@ -66,7 +66,7 @@ public class Resume extends AbstractSection implements Comparable<Resume>, Seria
         return contacts.get(type);
     }
 
-    public Map<SectionType, AbstractSection> getSections() {
+    public Map<SectionType, Section> getSections() {
         return sections;
     }
 
@@ -82,7 +82,7 @@ public class Resume extends AbstractSection implements Comparable<Resume>, Seria
         contacts.put(type, value);
     }
 
-    public void setSections(SectionType type, AbstractSection section) {
+    public void setSections(SectionType type, Section section) {
         sections.put(type, section);
     }
 

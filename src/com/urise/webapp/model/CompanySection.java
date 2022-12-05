@@ -6,10 +6,10 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class CompanySection extends AbstractSection {
+public class CompanySection extends Section {
     private static final long serialVersionUID = 1L;
 
-    private final List<Company> companies = new ArrayList<>();
+    private List<Company> companies = new ArrayList<>();
 
     public CompanySection() {
     }
@@ -17,6 +17,11 @@ public class CompanySection extends AbstractSection {
     public CompanySection(Company... elements) {
         requireNonNull(companies, "companies must not be null");
         companies.addAll(Arrays.asList(elements));
+    }
+
+    public CompanySection(List<Company> companies) {
+        requireNonNull(companies, "companies must not be null");
+        this.companies = companies;
     }
 
     public List<Company> getCompanies() {

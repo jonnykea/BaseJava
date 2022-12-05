@@ -22,6 +22,7 @@ public abstract class AbstractStorageTest {
         this.storage = storage;
     }
 
+    private static final String UUID_0 = "uuid0";
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -33,8 +34,8 @@ public abstract class AbstractStorageTest {
     final Resume RESUME_3 = new Resume(UUID_3, "Anna");
     final Resume RESUME_4 = new Resume(UUID_4, "Andrew");*/
 
-    final Resume RESUME_1 = new Resume("Max");
-    final Resume RESUME_2 = new Resume(UUID_1, "Jon");
+    final Resume RESUME_1 = ResumeTestData.fillAllResumeFields(UUID_0, "Max");
+    final Resume RESUME_2 = ResumeTestData.fillAllResumeFields(UUID_1, "Jon");
     final Resume RESUME_3 = ResumeTestData.fillAllResumeFields(UUID_2, "Anna");
     final Resume RESUME_4 = ResumeTestData.fillAllResumeFields(UUID_3, "Andrew");
 

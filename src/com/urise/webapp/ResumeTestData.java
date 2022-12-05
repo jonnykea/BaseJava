@@ -148,7 +148,7 @@ public class ResumeTestData {
 
         CompanySection companiesEduc = new CompanySection(Educ1, Educ2, Educ3, Educ4, Educ5, Educ6);
 
-        Map<SectionType, AbstractSection> sections = new HashMap<>();
+        Map<SectionType, Section> sections = new HashMap<>();
         sections.put(OBJECTIVE, objective);
         sections.put(PERSONAL, personal);
         sections.put(ACHIEVEMENT, achievement);
@@ -210,21 +210,22 @@ public class ResumeTestData {
 
         //      experience at companies
         Period experience1 = new Period(2013, Month.OCTOBER,1,
-                "Автор проекта.", "Создание, " + "организация и проведение Java онлайн проектов и стажировок.");
+                "Автор проекта.", "Создание, организация и проведение Java онлайн проектов и стажировок.");
         Company Exp1 = new Company("Java Online Projects", "link", Collections.singletonList(experience1));
         CompanySection companiesExp = new CompanySection(Exp1);
 
         //      education at institutions
-        Period education6_1 = new Period(1993, Month.SEPTEMBER,1, "Аспирантура " + "(программист С, С++)");
+        Period education6_1 = new Period(1993, Month.SEPTEMBER,1, "Аспирантура "
+                + "(программист С, С++)", "Обучение и получение новых навыков");
         Period education6_2 = new Period(1987, Month.SEPTEMBER, 1,1993, Month.JULY,1,
-                "Инженер (программист Fortran, C)");
+                "Инженер (программист Fortran, C)", "Обучение и получение новых навыков");
 
         Company Educ5 = new Company("Санкт-Петербургский национальный исследовательский университет информационных" +
                 " технологий, механики и оптики", "link", Arrays.asList(education6_1, education6_2));
 
         CompanySection companiesEduc = new CompanySection(Educ5);
 
-        Map<SectionType, AbstractSection> sections = new HashMap<>();
+        Map<SectionType, Section> sections = new HashMap<>();
         sections.put(OBJECTIVE, objective);
         sections.put(PERSONAL, personal);
         sections.put(ACHIEVEMENT, achievement);
