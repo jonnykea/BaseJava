@@ -1,9 +1,12 @@
 package com.urise.webapp.storage.strategy;
 
-import com.urise.webapp.model.ContactType;
-import com.urise.webapp.model.Resume;
+import com.urise.webapp.model.*;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class DataStreamSerializer implements StreamSerializerStrategy {
@@ -14,11 +17,54 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
             dos.writeUTF(r.getFullName());
             Map<ContactType, String> contacts = r.getContacts();
             dos.writeInt(contacts.size());
-            for (Map.Entry<ContactType, String> entry : r.getContacts().entrySet()) {
-                dos.writeUTF(entry.getKey().name());
-                dos.writeUTF(entry.getValue());
-            }
+            writeCollection(dos, contacts.entrySet(), entryContacts -> {
+                dos.writeUTF(entryContacts.getKey().name());
+                dos.writeUTF(entryContacts.getValue());
+            });
+            writeCollection(dos, r.getSections().entrySet(), entrySections -> {
+                SectionType type = entrySections.getKey();
+                Section section = entrySections.getValue();
+                dos.writeUTF(type.name());
+                switch (type) {
+                    case PERSONAL, OBJECTIVE -> dos.writeUTF(((TextSection) section).getContent());
+                    case ACHIEVEMENT, QUALIFICATIONS -> writeCollection(dos, ((ListSection) section).getItems(), EntryString ->
+                            dos.writeUTF(EntryString));
+                    case EXPERIENCE, EDUCATION -> writeCollection(dos, ((CompanySection) section).getCompanies(), entryCompanies -> {
+                                dos.writeUTF(entryCompanies.getName());
+                                dos.writeUTF(entryCompanies.getWebsite());
+                                writeCollection(dos, entryCompanies.getPeriods(), entryPeriods -> {
+                                    writeLocalDate(dos, entryPeriods.getStartDate());
+                                    writeLocalDate(dos, entryPeriods.getEndDate());
+                                    dos.writeUTF(entryPeriods.getPosition());
+                                    dos.writeUTF(entryPeriods.getDescription());
+                                });
+                            }
+                    );
+                }
+            });
+
         }
+    }
+
+    private <T> void writeCollection(DataOutputStream dos, Collection<T> collection, EntryElement<T> writer) throws IOException {
+        dos.writeInt(collection.size());
+        for (T item : collection) {
+            writer.write(item);
+        }
+    }
+
+    private interface EntryElement<T> {
+        void write(T t) throws IOException;
+    }
+
+    private void writeLocalDate(DataOutputStream dos, LocalDate ld) throws IOException {
+        dos.writeInt(ld.getYear());
+        dos.writeInt(ld.getMonth().getValue());
+        dos.writeInt(ld.getDayOfMonth());
+    }
+
+    private LocalDate readLocalDate(DataInputStream dis) throws IOException {
+        return LocalDate.of(dis.readInt(), dis.readInt(), dis.readInt());
     }
 
     @Override
@@ -27,11 +73,59 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
             String uuid = dis.readUTF();
             String fullName = dis.readUTF();
             Resume resume = new Resume(uuid, fullName);
-            int size = dis.readInt();
-            for (int i = 0; i < size; i++) {
-                resume.setContacts(ContactType.valueOf(dis.readUTF()), dis.readUTF());
-            }
+            readItems(dis, () ->
+                    resume.setContacts(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
+            readItems(dis, () -> {
+                SectionType sectionType = SectionType.valueOf(dis.readUTF());
+                resume.setSections(sectionType, readSection(dis, sectionType));
+            });
             return resume;
         }
     }
+
+    private Section readSection(DataInputStream dis, SectionType sectionType) throws IOException {
+        switch (sectionType) {
+            case PERSONAL:
+            case OBJECTIVE:
+                return new TextSection(dis.readUTF());
+            case ACHIEVEMENT:
+            case QUALIFICATIONS:
+                return new ListSection(readList(dis, () -> dis.readUTF()));
+            case EXPERIENCE:
+            case EDUCATION:
+                return new CompanySection(
+                        readList(dis, () -> new Company(dis.readUTF(), dis.readUTF(),readList(dis, () ->
+                                new Period(readLocalDate(dis), readLocalDate(dis), dis.readUTF(), dis.readUTF()))
+                        )));
+            default:
+                throw new IllegalStateException();
+        }
+    }
+
+    private <T> List<T> readList(DataInputStream dis, ElementToEntry<T> reader) throws IOException {
+        int size = dis.readInt();
+        List<T> list = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            list.add(reader.read());
+        }
+        return list;
+    }
+
+    private interface ElementToEntry<T> {
+        T read() throws IOException;
+    }
+
+    private void readItems(DataInputStream dis, ElementToRead processor) throws IOException {
+        int size = dis.readInt();
+        for (int i = 0; i < size; i++) {
+            processor.readItem();
+        }
+    }
+
+    private interface ElementToRead {
+        void readItem() throws IOException;
+    }
 }
+
+
+
