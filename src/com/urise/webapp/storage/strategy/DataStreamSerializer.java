@@ -16,7 +16,6 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
             dos.writeUTF(r.getUuid());
             dos.writeUTF(r.getFullName());
             Map<ContactType, String> contacts = r.getContacts();
-            dos.writeInt(contacts.size());
             writeCollection(dos, contacts.entrySet(), entryContacts -> {
                 dos.writeUTF(entryContacts.getKey().name());
                 dos.writeUTF(entryContacts.getValue());
@@ -26,7 +25,9 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
                 Section section = entrySections.getValue();
                 dos.writeUTF(type.name());
                 switch (type) {
-                    case PERSONAL, OBJECTIVE -> dos.writeUTF(((TextSection) section).getContent());
+                    case PERSONAL, OBJECTIVE -> {
+                        dos.writeUTF(((TextSection) section).getContent());
+                    }
                     case ACHIEVEMENT, QUALIFICATIONS -> writeCollection(dos, ((ListSection) section).getItems(), EntryString ->
                             dos.writeUTF(EntryString));
                     case EXPERIENCE, EDUCATION -> writeCollection(dos, ((CompanySection) section).getCompanies(), entryCompanies ->
@@ -85,6 +86,17 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
         }
     }
 
+    private void readItems(DataInputStream dis, ElementToRead processor) throws IOException {
+        int size = dis.readInt();
+        for (int i = 0; i < size; i++) {
+            processor.readItem();
+        }
+    }
+
+    private interface ElementToRead {
+        void readItem() throws IOException;
+    }
+
     private Section readSection(DataInputStream dis, SectionType sectionType) throws IOException {
         switch (sectionType) {
             case PERSONAL:
@@ -102,11 +114,6 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
         }
     }
 
-    private Company readCompany(DataInputStream dis) throws IOException {
-        return new Company(dis.readUTF(), dis.readUTF(), readList(dis, () ->
-                new Period(readLocalDate(dis), readLocalDate(dis), dis.readUTF(), dis.readUTF())));
-    }
-
     private <T> List<T> readList(DataInputStream dis, ElementToEntry<T> reader) throws IOException {
         int size = dis.readInt();
         List<T> list = new ArrayList<>(size);
@@ -118,16 +125,11 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
 
     private interface ElementToEntry<T> {
         T read() throws IOException;
+
     }
 
-    private void readItems(DataInputStream dis, ElementToRead processor) throws IOException {
-        int size = dis.readInt();
-        for (int i = 0; i < size; i++) {
-            processor.readItem();
-        }
-    }
-
-    private interface ElementToRead {
-        void readItem() throws IOException;
+    private Company readCompany(DataInputStream dis) throws IOException {
+        return new Company(dis.readUTF(), dis.readUTF(), readList(dis, () ->
+                new Period(readLocalDate(dis), readLocalDate(dis), dis.readUTF(), dis.readUTF())));
     }
 }
