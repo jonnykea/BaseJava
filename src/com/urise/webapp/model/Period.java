@@ -35,7 +35,7 @@ public class Period implements Serializable {
         this(of(startYear, startMonth, 1), NOW, position, description);
     }
 
-    public Period(int startYear, Month startMonth, int startDayOfMonth, int endYear, Month endMonth,  int endDayOfMonth, String position, String description) {
+    public Period(int startYear, Month startMonth, int startDayOfMonth, int endYear, Month endMonth, int endDayOfMonth, String position, String description) {
         this(of(startYear, startMonth, startDayOfMonth), of(endYear, endMonth, endDayOfMonth), position, description);
     }
 
@@ -60,6 +60,8 @@ public class Period implements Serializable {
         this.endDate = endDate;
         this.position = position;
         this.description = description;
+/*        if there isn't description so that should change code and to do the commit in line 58
+        this.description = description == null ? "" : description;*/
     }
 
     public LocalDate getStartDate() {
