@@ -1,4 +1,4 @@
-package com.urise.webapp;
+package com.urise.webapp.myTasks.enumAndSigleton;
 
 public class TestSingleton {
     private static TestSingleton instance;

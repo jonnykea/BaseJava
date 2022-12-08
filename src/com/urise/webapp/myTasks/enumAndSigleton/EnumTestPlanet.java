@@ -1,6 +1,6 @@
-package com.urise.webapp;
+package com.urise.webapp.myTasks.enumAndSigleton;
 
-    public enum Planet {
+    public enum EnumTestPlanet {
         MERCURY (3.303e+23, 2.4397e6),
         VENUS   (4.869e+24, 6.0518e6),
         EARTH   (5.976e+24, 6.37814e6),
@@ -12,12 +12,12 @@ package com.urise.webapp;
 
         private final double mass;   // в килограммах
         private final double radius; // в метрах
-        Planet(double mass, double radius) {
+        EnumTestPlanet(double mass, double radius) {
             this.mass = mass;
             this.radius = radius;
         }
-        private double mass() { return mass; }
-        private double radius() { return radius; }
+        public double mass() { return mass; }
+        double radius() { return radius; }
 
         // гравитационная постоянная
         public static final double G = 6.67300E-11;
@@ -29,13 +29,13 @@ package com.urise.webapp;
             return otherMass * surfaceGravity();
         }
         public static void main(String[] args) {
-            /*if (args.length != 1) {
+            if (args.length != 1) {
                 System.err.println("Usage: java Planet &lt;earth_weight&gt;");
                 System.exit(-1);
-            }*/
+            }
             double earthWeight = Double.parseDouble(args[0]);
             double mass = earthWeight/EARTH.surfaceGravity();
-            for (Planet p : Planet.values())
+            for (EnumTestPlanet p : EnumTestPlanet.values())
                 System.out.printf("Your weight on %s is %f%n",
                         p, p.surfaceWeight(mass));
         }
