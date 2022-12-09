@@ -5,14 +5,14 @@ public class BankAccountTest {
     public static void main(String[] args) throws InterruptedException {
         BankAccountSynchronized ba = new BankAccountSynchronized(0);
         var t1 = new Thread(() -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 ba.deposit(100);
             }
 
         });
 
         var t2 = new Thread(() -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 ba.withdraw(100);
             }
         });

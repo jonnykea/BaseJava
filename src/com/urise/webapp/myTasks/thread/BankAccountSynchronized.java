@@ -14,7 +14,8 @@ public class BankAccountSynchronized {
             System.out.println("Acquired Lock: " + Thread.currentThread());
             long newBalance = balance - amount;
             balance = newBalance;
-            System.out.println("Unlocked the lock: " + Thread.currentThread());
+            System.out.println("Unlocked the lock: " + Thread.currentThread() + "\n");
+            System.out.println(balance);
         }
     }
 
@@ -23,7 +24,8 @@ public class BankAccountSynchronized {
             System.out.println("Acquired Lock: " + Thread.currentThread());
             long newBalance = balance + amount;
             balance = newBalance;
-            System.out.println("Unlocked the lock: " + Thread.currentThread());
+            System.out.println("Unlocked the lock: " + Thread.currentThread() + "\n");
+            System.out.println(balance);
         }
     }
 

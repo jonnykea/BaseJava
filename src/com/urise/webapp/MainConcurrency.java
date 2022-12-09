@@ -11,31 +11,28 @@ public class MainConcurrency {
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Thread.currentThread().getName());
 
-        Thread thread0 = new Thread() {
+/*        Thread thread0 = new Thread() {
             @Override
             public void run() {
                 System.out.println(getName() + ", " + getState());
                 throw new IllegalStateException();
             }
         };
-        thread0.start();
+        thread0.start();*/
 
         new Thread(new Runnable() {
-
             @Override
             public void run() {
                 System.out.println(Thread.currentThread().getName() + ", " + Thread.currentThread().getState());
             }
-
             private void inc() {
                 synchronized (this) {
 //                    counter++;
                 }
             }
-
         }).start();
 
-        System.out.println(thread0.getState());
+//        System.out.println(thread0.getState());
 
         final MainConcurrency mainConcurrency = new MainConcurrency();
         List<Thread> threads = new ArrayList<>(THREADS_NUMBER);
