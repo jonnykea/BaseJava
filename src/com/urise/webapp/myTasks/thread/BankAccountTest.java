@@ -8,7 +8,6 @@ public class BankAccountTest {
             for (int i = 0; i < 10; i++) {
                 ba.deposit(100);
             }
-
         });
 
         var t2 = new Thread(() -> {
