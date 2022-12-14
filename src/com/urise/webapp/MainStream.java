@@ -3,9 +3,8 @@ package com.urise.webapp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class MainStream {
     public static void main(String[] args) {
@@ -41,8 +40,9 @@ public class MainStream {
         удалить все нечетные, если четная - удалить все четные. Сложность алгоритма должна быть O(N).
         Optional - решение в один стрим.*/
 
-        List<Integer> list = new ArrayList<>(Arrays.asList(0, 2, 3, 9, 5, 2, 1, 7, 6, 1));
-        System.out.println(oddOrEven(list));
+        List<Integer> list = new ArrayList<>(Arrays.asList(0, 2, 3, 9, 5, 2, 1, 7, 6));
+        System.out.println(oddOrEvenVariant1(list));
+        System.out.println(oddOrEvenVariant2(list));
     }
 
     static int minValue(int[] values) {
@@ -53,7 +53,7 @@ public class MainStream {
                 .reduce(0, (total, i) -> (total * 10) + i);
     }
 
-    static List<Integer> oddOrEven(List<Integer> integers) {
+    static List<Integer> oddOrEvenVariant1(List<Integer> integers) {
         List<Integer> listOdd = new ArrayList<>(integers.size());
         List<Integer> listEven = new ArrayList<>(integers.size());
         Integer sum = integers.stream()
@@ -63,8 +63,18 @@ public class MainStream {
                     } else {
                         listOdd.add(i);
                     }
-                }).reduce(0, Integer::sum);
+                })
+                .reduce(0, Integer::sum);
 
-        return sum % 2 == 0 ? listEven : listOdd;
+        return sum % 2 == 0 ?  listOdd : listEven;
+    }
+
+
+    static List<Integer> oddOrEvenVariant2(List<Integer> integers) {
+        int sum = integers.stream().reduce(0, Integer::sum);
+        boolean isSumEven = sum % 2 == 0;
+        return integers.stream()
+                .filter(i-> isSumEven == (i % 2 != 0))
+                .collect(Collectors.toList());
     }
 }
