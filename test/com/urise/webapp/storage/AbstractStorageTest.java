@@ -4,6 +4,7 @@ import com.urise.webapp.ResumeTestData;
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
+import com.urise.webapp.util.Config;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File("C:\\Users\\Admin\\IdeaProjects\\basejava\\storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
     protected final Storage storage;
 
     protected AbstractStorageTest(Storage storage) {
