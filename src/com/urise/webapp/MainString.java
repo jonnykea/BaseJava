@@ -9,7 +9,7 @@ public class MainString {
         }
         System.out.println(sb);
 
-        String str1 = "abc";
+        String str1 = "abcd";
         String str3 = "c";
         String str2 = ("ab" + str3).intern();
         System.out.println(str1 == str2);
