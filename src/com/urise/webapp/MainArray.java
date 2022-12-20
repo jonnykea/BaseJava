@@ -7,13 +7,14 @@ import com.urise.webapp.storage.Storage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
 
 public class MainArray {
     private final static Storage ARRAY_STORAGE = new MapResumeStorage();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
@@ -64,7 +65,7 @@ public class MainArray {
         }
     }
 
-    static void printAll() {
+    static void printAll() throws SQLException {
         List<Resume> all = ARRAY_STORAGE.getAllSorted();
         System.out.println("----------------------------");
         if (all.size() == 0) {

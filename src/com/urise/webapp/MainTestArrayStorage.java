@@ -10,7 +10,7 @@ import com.urise.webapp.storage.Storage;
 public class MainTestArrayStorage {
     private static final Storage ARRAY_STORAGE = new ListStorage();
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         final Resume r1 = new Resume("uuid1");
         final Resume r2 = new Resume("uuid2");
         final Resume r3 = new Resume("uuid3");
