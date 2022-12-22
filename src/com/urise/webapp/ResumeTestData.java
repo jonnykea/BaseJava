@@ -167,6 +167,12 @@ public class ResumeTestData {
 
         Resume resume = new Resume("1", "Григорий Кислин", sections, contacts);
 
+
+
+
+
+
+
         System.out.println("                          " + resume.getFullName() + "\n");
         printContacts(contacts);
         System.out.println();
@@ -242,6 +248,6 @@ public class ResumeTestData {
         contacts.put(STACKOVERFLOW, "Reference");
         contacts.put(HOMEPAGE, "Reference");
 
-        return new Resume(uuid, fullName, sections, contacts);
+        return new Resume(uuid, fullName, contacts);
     }
 }

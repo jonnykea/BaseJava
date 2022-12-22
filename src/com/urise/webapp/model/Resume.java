@@ -40,6 +40,15 @@ public class Resume extends Section implements Comparable<Resume>, Serializable 
         this.fullName = fullName;
     }
 
+    public Resume(String uuid, String fullName, Map<ContactType, String> contacts) {
+        requireNonNull(uuid, "uuid must not be null");
+        requireNonNull(fullName, "fullName must not be null");
+        requireNonNull(contacts, "contacts must not be null");
+        this.contacts = contacts;
+        this.uuid = uuid;
+        this.fullName = fullName;
+    }
+
     public Resume(String uuid, String fullName, Map<SectionType, Section> sections, Map<ContactType, String> contacts) {
         requireNonNull(uuid, "uuid must not be null");
         requireNonNull(fullName, "fullName must not be null");
