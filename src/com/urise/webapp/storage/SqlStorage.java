@@ -1,6 +1,5 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.sql.SqlHelper;
@@ -42,9 +41,7 @@ public class SqlStorage implements Storage {
                 ps -> {
                     ps.setString(1, r.getUuid());
                     ps.setString(2, r.getFullName());
-                    if (ps.execute()) {
-                        throw new ExistStorageException(r.getUuid());
-                    }
+                    ps.execute();
                     return null;
                 });
     }
@@ -80,7 +77,7 @@ public class SqlStorage implements Storage {
         sqlHelper.execute("SELECT uuid, full_name FROM resume ORDER BY full_name ASC", ps -> {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Resume(rs.getString("uuid").trim(), rs.getString("full_name").trim()));
+                list.add(new Resume(rs.getString("uuid"), rs.getString("full_name")));
             }
             return true;
         });
@@ -91,11 +88,7 @@ public class SqlStorage implements Storage {
     public int size() {
         return sqlHelper.execute("SELECT count(*) FROM resume", ps -> {
             ResultSet rs = ps.executeQuery();
-            int count = 0;
-            if (rs.next()) {
-                count = rs.getInt(1);
-            }
-            return count;
+            return rs.next() ? rs.getInt(1) : 0;
         });
     }
 }

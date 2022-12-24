@@ -23,7 +23,7 @@ public class SqlHelper {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             return executor.execute(ps);
         } catch (SQLException e) {
-            if (e.getMessage().contains("already exists")) {
+            if (e.getSQLState().equals("23505")) {
                 throw new ExistStorageException(super.toString());
             }
             throw new StorageException(e);
