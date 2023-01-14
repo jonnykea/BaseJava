@@ -1,6 +1,6 @@
 package com.urise.webapp.storage;
 
-import com.urise.webapp.util.Config;
+import com.urise.webapp.Config;
 
 public class SqlStorageTest extends AbstractStorageTest {
 

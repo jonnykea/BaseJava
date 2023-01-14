@@ -236,8 +236,8 @@ public class ResumeTestData {
         sections.put(PERSONAL, personal);
         sections.put(ACHIEVEMENT, achievement);
         sections.put(QUALIFICATIONS, qualification);
-        sections.put(EXPERIENCE, companiesExp);
-        sections.put(EDUCATION, companiesEduc);
+        /*sections.put(EXPERIENCE, companiesExp);
+        sections.put(EDUCATION, companiesEduc);*/
 
         Map<ContactType, String> contacts = new HashMap<>();
         contacts.put(PHONE, "+7(921) 855-0482");
@@ -248,6 +248,6 @@ public class ResumeTestData {
         contacts.put(STACKOVERFLOW, "Reference");
         contacts.put(HOMEPAGE, "Reference");
 
-        return new Resume(uuid, fullName, contacts);
+        return new Resume(uuid, fullName,sections, contacts);
     }
 }

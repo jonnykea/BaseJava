@@ -5,7 +5,7 @@ import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.util.Config;
+import com.urise.webapp.Config;
 import org.junit.Before;
 import org.junit.Test;
 
