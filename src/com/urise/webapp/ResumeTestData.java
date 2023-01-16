@@ -3,17 +3,31 @@ package com.urise.webapp;
 import com.urise.webapp.model.*;
 
 import java.time.Month;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.urise.webapp.model.ContactType.*;
 import static com.urise.webapp.model.SectionType.*;
 
 public class ResumeTestData {
-    public static void main(String[] args) {
 
+    public static final String UUID_0 = UUID.randomUUID().toString();
+    public static final String UUID_1 = UUID.randomUUID().toString();
+    public static final String UUID_2 = UUID.randomUUID().toString();
+    public static final String UUID_3 = UUID.randomUUID().toString();
+    public static final String UUID_4 = UUID.randomUUID().toString();
+    public static final String UUID_NOT_EXIST = "dummy";
+
+/*    final Resume RESUME_1 = new Resume(UUID_1, "Jon");
+    final Resume RESUME_2 = new Resume(UUID_2, "Max");
+    final Resume RESUME_3 = new Resume(UUID_3, "Anna");
+    final Resume RESUME_4 = new Resume(UUID_4, "Andrew");*/
+
+    public static final Resume RESUME_1 = ResumeTestData.fillAllResumeFields(UUID_0, "Max");
+    public static final Resume RESUME_2 = ResumeTestData.fillAllResumeFields(UUID_1, "Jon");
+    public static final Resume RESUME_3 = ResumeTestData.fillAllResumeFields(UUID_2, "Anna");
+    public static final Resume RESUME_4 = ResumeTestData.fillAllResumeFields(UUID_3, "Andrew");
+
+    public static void main(String[] args) {
         TextSection objective = new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и " +
                 "Enterprise технологиям");
         TextSection personal = new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность." +

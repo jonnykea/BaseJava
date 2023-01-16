@@ -13,8 +13,8 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
+import static com.urise.webapp.ResumeTestData.*;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
@@ -24,23 +24,6 @@ public abstract class AbstractStorageTest {
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
-
-    private static final String UUID_0 = UUID.randomUUID().toString();
-    private static final String UUID_1 = UUID.randomUUID().toString();
-    private static final String UUID_2 = UUID.randomUUID().toString();
-    private static final String UUID_3 = UUID.randomUUID().toString();
-    private static final String UUID_4 = UUID.randomUUID().toString();
-    private static final String UUID_NOT_EXIST = "dummy";
-
-/*    final Resume RESUME_1 = new Resume(UUID_1, "Jon");
-    final Resume RESUME_2 = new Resume(UUID_2, "Max");
-    final Resume RESUME_3 = new Resume(UUID_3, "Anna");
-    final Resume RESUME_4 = new Resume(UUID_4, "Andrew");*/
-
-    final Resume RESUME_1 = ResumeTestData.fillAllResumeFields(UUID_0, "Max");
-    final Resume RESUME_2 = ResumeTestData.fillAllResumeFields(UUID_1, "Jon");
-    final Resume RESUME_3 = ResumeTestData.fillAllResumeFields(UUID_2, "Anna");
-    final Resume RESUME_4 = ResumeTestData.fillAllResumeFields(UUID_3, "Andrew");
 
 
     @Before

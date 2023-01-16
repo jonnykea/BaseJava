@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.*;
 
 public class MainCollections {
-    private static final String UUID_1 = "uuid1";
+    public static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
 
-    final static Resume RESUME_1 = new Resume(UUID_1);
+    public static Resume RESUME_1 = new Resume(UUID_1);
     final static Resume RESUME_2 = new Resume(UUID_2);
     final static Resume RESUME_3 = new Resume(UUID_3);
 
