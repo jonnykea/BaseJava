@@ -1,12 +1,7 @@
+
+<%@ page import="java.util.List" %>
 <%@ page import="com.urise.webapp.model.Resume" %>
 <%@ page import="com.urise.webapp.model.ContactType" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 16.01.2023
-  Time: 13:25
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,6 +10,7 @@
     <title>Список всех резюме</title>
 </head>
 <body>
+<jsp:include page="fragments/header.jsp"/>
 <section>
     <table border="1" cellpadding="8" cellspacing="0">
         <tr>
@@ -25,7 +21,8 @@
             for (Resume resume : (List<Resume>) request.getAttribute("resumes")) {
         %>
         <tr>
-            <td><a href="resume?uuid=<%=resume.getUuid()%>"><%=resume.getFullName()%></a>
+            <td><a href="resume?uuid=<%=resume.getUuid()%>"><%=resume.getFullName()%>
+            </a>
             </td>
             <td><%=resume.getContact(ContactType.MAIL)%>
             </td>
@@ -35,5 +32,6 @@
         %>
     </table>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
