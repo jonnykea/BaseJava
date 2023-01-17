@@ -1,7 +1,6 @@
-
-<%@ page import="java.util.List" %>
 <%@ page import="com.urise.webapp.model.Resume" %>
 <%@ page import="com.urise.webapp.model.ContactType" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,8 +20,7 @@
             for (Resume resume : (List<Resume>) request.getAttribute("resumes")) {
         %>
         <tr>
-            <td><a href="resume?uuid=<%=resume.getUuid()%>"><%=resume.getFullName()%>
-            </a>
+            <td><a href="resume?uuid=<%=resume.getUuid()%>"><%=resume.getFullName()%></a>
             </td>
             <td><%=resume.getContact(ContactType.MAIL)%>
             </td>
@@ -35,4 +33,3 @@
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
-<jsp:useBean id="resume" type="com.urise.webapp.model.Resume"/>
