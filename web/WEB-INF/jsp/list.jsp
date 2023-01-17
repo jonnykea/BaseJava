@@ -35,3 +35,4 @@
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
+<jsp:useBean id="resume" type="com.urise.webapp.model.Resume"/>
