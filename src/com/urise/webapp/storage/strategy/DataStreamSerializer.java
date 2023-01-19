@@ -76,7 +76,7 @@ public class DataStreamSerializer implements StreamSerializerStrategy {
             String fullName = dis.readUTF();
             Resume resume = new Resume(uuid, fullName);
             readItems(dis, () ->
-                    resume.setContacts(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
+                    resume.setContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));
             readItems(dis, () -> {
                 SectionType sectionType = SectionType.valueOf(dis.readUTF());
                 resume.setSections(sectionType, readSection(dis, sectionType));

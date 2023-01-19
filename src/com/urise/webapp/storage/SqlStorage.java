@@ -158,7 +158,7 @@ public class SqlStorage implements Storage {
         String value = rs.getString("value");
         if (value != null) {
             ContactType type = ContactType.valueOf(rs.getString("type"));
-            r.setContacts(type, value);
+            r.setContact(type, value);
         }
     }
 

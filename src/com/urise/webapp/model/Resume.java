@@ -88,7 +88,7 @@ public class Resume extends Section implements Comparable<Resume>, Serializable 
         this.fullName = fullName;
     }
 
-    public void setContacts(ContactType type, String value) {
+    public void setContact(ContactType type, String value) {
         contacts.put(type, value);
     }
 
