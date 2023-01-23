@@ -25,6 +25,7 @@ public class Company extends Section {
     }
 
     public String getWebsite() {
+        this.website = website == null ? "" : website;
         return website;
     }
 
