@@ -80,8 +80,8 @@ public class Resume extends Section implements Comparable<Resume>, Serializable 
         return sections;
     }
 
-    public String getSection(SectionType type) {
-        return contacts.get(type);
+    public Section getSection(SectionType type) {
+        return sections.get(type);
     }
 
     public void setFullName(String fullName) {

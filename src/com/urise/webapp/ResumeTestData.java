@@ -250,8 +250,8 @@ public class ResumeTestData {
         sections.put(PERSONAL, personal);
         sections.put(ACHIEVEMENT, achievement);
         sections.put(QUALIFICATIONS, qualification);
-        /*sections.put(EXPERIENCE, companiesExp);
-        sections.put(EDUCATION, companiesEduc);*/
+        sections.put(EXPERIENCE, companiesExp);
+        sections.put(EDUCATION, companiesEduc);
 
         Map<ContactType, String> contacts = new HashMap<>();
         contacts.put(PHONE, "+7(921) 855-0482");
