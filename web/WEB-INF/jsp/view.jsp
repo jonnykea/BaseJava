@@ -22,8 +22,8 @@
                 <%=contactEntry.getKey().toHtml(contactEntry.getValue())%><br/>
         </c:forEach>
     <p>
-
-    <hr>  <%--horizontal line--%>
+    <hr>
+    <%--horizontal line--%>
     <table cellpadding="2">
         <c:forEach var="sectionEntry" items="${resume.sections}">
             <jsp:useBean id="sectionEntry"
@@ -35,20 +35,14 @@
                 <td colspan="2"><h2><a name="type.name">${type.title}</a></h2></td>
             </tr>
             <c:choose>
-                <c:when test="${type=='OBJECTIVE'}">
+                <c:when test="${type=='OBJECTIVE'|| type=='PERSONAL'}">
                     <tr>
                         <td colspan="2">
                             <h3><%=((TextSection) section).getContent()%></h3>
                         </td>
                     </tr>
                 </c:when>
-                <c:when test="${type=='PERSONAL'}">
-                    <tr>
-                        <td colspan="2">
-                            <%=((TextSection) section).getContent()%>
-                        </td>
-                    </tr>
-                </c:when>
+
                 <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
                     <tr>
                         <td colspan="2">
@@ -60,30 +54,25 @@
                         </td>
                     </tr>
                 </c:when>
-                <%--<c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
-                    <c:forEach var="org" items="<%=((CompanySection) section).getCompanies()%>">
+                <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
+                    <c:forEach var="company" items="<%=((CompanySection) section).getCompanies()%>">
+                        <jsp:useBean id="company" type="com.urise.webapp.model.Company"/>
                         <tr>
                             <td colspan="2">
-                                <c:choose>
-                                    <c:when test="${empty org.homePage.url}">
-                                        <h3>${org.homePage.name}</h3>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <h3><a href="${org.homePage.url}">${org.homePage.name}</a></h3>
-                                    </c:otherwise>
-                                </c:choose>
+                               <%-- <h3><a href="${company.name}">${company.website}</a></h3>--%>
+                                   <h3><%=company.getName()%></h3>
+                                   <h3><%=company.getWebsite()%></h3>
                             </td>
                         </tr>
-                        <c:forEach var="position" items="${org.positions}">
-                            <jsp:useBean id="position" type="com.urise.webapp.model.Period"/>
+                        <c:forEach var="period" items="${company.periods}">
+                            <jsp:useBean id="periods" type="com.urise.webapp.model.Period"/>
                             <tr>
-                                <td width="15%" style="vertical-align: top"><%=HtmlUtil.formatDates(position)%>
-                                </td>
-                                <td><b>${position.title}</b><br>${position.description}</td>
+                                <td> ${period} </td>
+                                <%--<td><b>${periods.title}</b><br>${periods.description}</td>--%>
                             </tr>
                         </c:forEach>
                     </c:forEach>
-                </c:when>--%>
+                </c:when>
             </c:choose>
         </c:forEach>
     </table>
