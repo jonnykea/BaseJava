@@ -231,19 +231,26 @@ public class ResumeTestData {
         //      experience at companies
         Period experience1 = new Period(2013, Month.OCTOBER,1,
                 "Автор проекта.", "Создание, организация и проведение Java онлайн проектов и стажировок.");
-        Company Exp1 = new Company("Java Online Projects", "link", Collections.singletonList(experience1));
-        CompanySection companiesExp = new CompanySection(Exp1);
+        Period experience2 = new Period(2022, Month.SEPTEMBER,5,
+                "Engineer of fire development","Отдел противопожарной автоматики и инженерно-технических средств охраны");
+        Company Exp1 = new Company("JavaOPS", "https://javaops.ru/reg/basejava", Collections.singletonList(experience1));
+        Company Exp2 = new Company("КНПЗ", "https://rnknpz.rosneft.ru", Collections.singletonList(experience2));
+        CompanySection companiesExp = new CompanySection(Exp1,Exp2);
+
 
         //      education at institutions
         Period education6_1 = new Period(1993, Month.SEPTEMBER,1, "Аспирантура "
                 + "(программист С, С++)", "Обучение и получение новых навыков");
         Period education6_2 = new Period(1987, Month.SEPTEMBER, 1,1993, Month.JULY,1,
                 "Инженер (программист Fortran, C)", "Обучение и получение новых навыков");
+        Period education3 = new Period(2022, Month.SEPTEMBER,5,
+                "Java Developer ","Изучение курса Base Java");
+        Company Educ1 = new Company("JavaOPS", "https://javaops.ru/reg/basejava", Collections.singletonList(education3));
 
         Company Educ5 = new Company("Санкт-Петербургский национальный исследовательский университет информационных" +
-                " технологий, механики и оптики", "link", Arrays.asList(education6_1, education6_2));
+                " технологий, механики и оптики","", Arrays.asList(education6_1, education6_2));
 
-        CompanySection companiesEduc = new CompanySection(Educ5);
+        CompanySection companiesEduc = new CompanySection(Educ5,Educ1);
 
         Map<SectionType, Section> sections = new HashMap<>();
         sections.put(OBJECTIVE, objective);

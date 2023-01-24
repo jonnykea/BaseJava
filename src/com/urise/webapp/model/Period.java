@@ -80,12 +80,16 @@ public class Period implements Serializable {
         return description;
     }
 
+    public String getFullDate(){
+        return (startDate + " - " + endDate);
+    }
+
     @Override
     public String toString() {
         return startDate + " - " + endDate + "\n" + (position == null ? "" : position + "\n") + description + "\n";
     }
 
-    @Override
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -38,7 +38,8 @@
                 <c:when test="${type=='OBJECTIVE'|| type=='PERSONAL'}">
                     <tr>
                         <td colspan="2">
-                            <h3><%=((TextSection) section).getContent()%></h3>
+                            <h3><%=((TextSection) section).getContent()%>
+                            </h3>
                         </td>
                     </tr>
                 </c:when>
@@ -57,20 +58,30 @@
                 <c:when test="${type=='EXPERIENCE' || type=='EDUCATION'}">
                     <c:forEach var="company" items="<%=((CompanySection) section).getCompanies()%>">
                         <jsp:useBean id="company" type="com.urise.webapp.model.Company"/>
-                        <tr>
-                            <td colspan="2">
-                               <%-- <h3><a href="${company.name}">${company.website}</a></h3>--%>
-                                   <h3><%=company.getName()%></h3>
-                                   <h3><%=company.getWebsite()%></h3>
-                            </td>
-                        </tr>
-                        <c:forEach var="period" items="${company.periods}">
-                            <jsp:useBean id="periods" type="com.urise.webapp.model.Period"/>
-                            <tr>
-                                <td> ${period} </td>
-                                <%--<td><b>${periods.title}</b><br>${periods.description}</td>--%>
+                        <div class="period">
+                            <tr align="left">
+                                <p>
+                                    <th colspan="2">
+                                <h4><%=company.getName()%><br><%=company.getWebsite()%>
+                                </h4></th>
+                                </p>
                             </tr>
-                        </c:forEach>
+                            <c:forEach var="period" items="${company.periods}">
+                                <jsp:useBean id="period" type="com.urise.webapp.model.Period"/>
+                                <tbody align="center">
+                                <tr>
+                                    <td><%=period.getFullDate()%>
+                                        <br></td>
+                                    <td><b><%=period.getPosition()%>
+                                    </b><br>
+                                        <%=period.getDescription()%>
+                                        <hr>
+                                        <br>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </c:forEach>
+                        </div>
                     </c:forEach>
                 </c:when>
             </c:choose>

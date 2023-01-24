@@ -16,7 +16,7 @@ public class Company extends Section {
 
     public Company(String name, String website, List<Period> periods) {
         this.name = name;
-        this.website = website;
+        this.website = website == null ? "" : website;
         this.periods = periods;
     }
 
