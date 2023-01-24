@@ -92,7 +92,7 @@ public class Resume extends Section implements Comparable<Resume>, Serializable 
         contacts.put(type, value);
     }
 
-    public void setSections(SectionType type, Section section) {
+    public void setSection(SectionType type, Section section) {
         sections.put(type, section);
     }
 

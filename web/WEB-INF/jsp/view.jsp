@@ -60,26 +60,31 @@
                         <jsp:useBean id="company" type="com.urise.webapp.model.Company"/>
                         <div class="period">
                             <tr align="left">
-                                <p>
-                                    <th colspan="2">
-                                <h4><%=company.getName()%><br><%=company.getWebsite()%>
-                                </h4></th>
-                                </p>
+                                <td colspan="2">
+                                    <c:choose>
+                                        <c:when test="${empty company.website}">
+                                            <h4><%=company.getName()%>
+                                            </h4>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h4><a href="${company.website}"><%=company.getName()%></a></h4>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                             <c:forEach var="period" items="${company.periods}">
                                 <jsp:useBean id="period" type="com.urise.webapp.model.Period"/>
-                                <tbody align="center">
-                                <tr>
-                                    <td><%=period.getFullDate()%>
-                                        <br></td>
-                                    <td><b><%=period.getPosition()%>
-                                    </b><br>
-                                        <%=period.getDescription()%>
-                                        <hr>
-                                        <br>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                <div class="content">
+                                    <tr>
+                                        <td><%=period.getFullDate()%>
+                                            <br></td>
+                                        <td><b><%=period.getPosition()%>
+                                        </b><br>
+                                            <%=period.getDescription()%>
+                                            <hr>
+                                        </td>
+                                    </tr>
+                                </div>
                             </c:forEach>
                         </div>
                     </c:forEach>

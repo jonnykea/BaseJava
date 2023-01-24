@@ -37,7 +37,7 @@ dd {
     vertical-align: top;
 }
 
-h2, h3 {
+h2, h3, h4 {
     margin: 15px 0 5px;
 }
 
@@ -71,6 +71,15 @@ a[href*="github."] {
 }
 
 .period {
+    display: table;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    width: min-content;
+   }
+
+content {
+    display: table-cell;
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;

@@ -14,19 +14,19 @@ public enum ContactType {
             return getTitle() + ": " + toLink("mailto:" + value, value);
         }
     },
-    LINKEDIN("Профиль LinkedIn") {
+    LINKEDIN("LinkedIn") {
         @Override
         public String toHtml0(String value) {
             return toLink(value);
         }
     },
-    GITHUB("Профиль GitHub") {
+    GITHUB("GitHub") {
         @Override
         public String toHtml0(String value) {
             return toLink(value);
         }
     },
-    STACKOVERFLOW("Профиль Stackoverflow") {
+    STACKOVERFLOW("Stackoverflow") {
         @Override
         public String toHtml0(String value) {
             return toLink(value);

@@ -264,10 +264,10 @@ public class ResumeTestData {
         contacts.put(PHONE, "+7(921) 855-0482");
         contacts.put(SKYPE, "skype:grigory.kislin");
         contacts.put(MAIL, "gkislin@yandex.ru");
-        contacts.put(LINKEDIN, "Reference");
-        contacts.put(GITHUB, "Reference");
-        contacts.put(STACKOVERFLOW, "Reference");
-        contacts.put(HOMEPAGE, "Reference");
+        contacts.put(LINKEDIN, "@linkTo_me");
+        contacts.put(GITHUB, "$git_hub");
+        contacts.put(STACKOVERFLOW, "http/enterToUs");
+        contacts.put(HOMEPAGE, "MyHtmlPage");
 
         return new Resume(uuid, fullName,sections, contacts);
     }
