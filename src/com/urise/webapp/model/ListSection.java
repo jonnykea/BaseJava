@@ -9,6 +9,8 @@ import static java.util.Objects.requireNonNull;
 public class ListSection extends Section {
     private static final long serialVersionUID = 1L;
 
+    public static final ListSection EMPTY = new ListSection("");
+
     private List<String> items = new ArrayList<>();
 
     public ListSection() {

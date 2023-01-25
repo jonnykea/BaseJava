@@ -64,7 +64,8 @@
                                     <dt>Начальная дата:</dt>
                                     <dd>
                                         <input type="text" name="${type}${counter.index}startDate" size=10
-                                               value="<%=DateUtil.format(period.getStartDate())%>" placeholder="MM/yyyy">
+                                               value="<%=DateUtil.format(period.getStartDate())%>"
+                                               placeholder="MM/yyyy">
                                     </dd>
                                 </dl>
                                 <dl>

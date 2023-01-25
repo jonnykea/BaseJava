@@ -4,8 +4,8 @@ section {
 }
 
 header {
-    background: none repeat scroll 0 0 #A6C9E2;
-    color: #2E6E9E;
+    background: none repeat scroll 0 0 #a0c3d9;
+    color: #6fd265;
     font-size: 20px;
     padding: 5px 20px;
     text-align: center;
@@ -78,7 +78,7 @@ a[href*="github."] {
     width: min-content;
    }
 
-content {
+.content {
     display: table-cell;
     font-weight: bold;
     font-size: 18px;

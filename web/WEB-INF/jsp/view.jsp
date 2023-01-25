@@ -43,7 +43,6 @@
                         </td>
                     </tr>
                 </c:when>
-
                 <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
                     <tr>
                         <td colspan="2">
