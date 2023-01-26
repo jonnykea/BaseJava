@@ -3,6 +3,7 @@ package com.urise.webapp.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -27,16 +28,21 @@ public class ListSection extends Section {
     }
 
     public List<String> getItems() {
-        return items;
+//        items.removeIf(s -> s == null || "".equals(s));
+              return items.stream()
+                      .filter(s -> (s != null) && (!s.trim().isEmpty())&& (!s.equals("\n")))
+                      .collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (String s : items) {
-            sb.append("-  ").append(s).append("\n");
+//            sb.append("-  ").append(s).append("\n");
+            sb.append(s).append("\n");
         }
         return sb + "\n";
+//        return items.toString();
     }
 
     @Override

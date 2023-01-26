@@ -23,7 +23,8 @@ public class TextSection extends Section {
 
     @Override
     public String toString() {
-        return "-  " + content + "\n";
+        /*return "-  " + content + "\n";*/
+        return content;
     }
 
 

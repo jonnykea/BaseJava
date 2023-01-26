@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class DateUtil {
 
     public static final LocalDate NOW = LocalDate.of(2023, 01, 27);
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d::MMM::yyyy");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("M/yyyy");
 
     public static LocalDate of(int year, Month month, int dayOfMonth) {
         return LocalDate.of(year, month, dayOfMonth);
@@ -20,7 +20,7 @@ public class DateUtil {
     }
 
     public static LocalDate parse(String date) {
-        if ("Сейчас".equals(date)) return NOW;
+        if (CheckInNull.isEmpty(date) || "Сейчас".equals(date)) return NOW;
         YearMonth yearMonth = YearMonth.parse(date, DATE_FORMATTER);
         return LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), 1);
     }

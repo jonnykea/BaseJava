@@ -3,7 +3,6 @@ package com.urise.webapp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class MainStream {
@@ -43,7 +42,11 @@ public class MainStream {
         List<Integer> list = new ArrayList<>(Arrays.asList(0, 2, 3, 9, 5, 2, 1, 7, 6));
         System.out.println(oddOrEvenVariant1(list));
         System.out.println(oddOrEvenVariant2(list));
+
+        List<String> listString = new ArrayList<>(Arrays.asList("   ", "555555", "9", "FFFFF","  "));
+        System.out.println(notEmpty(listString));
     }
+
 
     static int minValue(int[] values) {
         return Arrays.stream(values)
@@ -66,7 +69,7 @@ public class MainStream {
                 })
                 .reduce(0, Integer::sum);
 
-        return sum % 2 == 0 ?  listOdd : listEven;
+        return sum % 2 == 0 ? listOdd : listEven;
     }
 
 
@@ -74,7 +77,13 @@ public class MainStream {
         int sum = integers.stream().reduce(0, Integer::sum);
         boolean isSumEven = sum % 2 == 0;
         return integers.stream()
-                .filter(i-> isSumEven == (i % 2 != 0))
+                .filter(i -> isSumEven == (i % 2 != 0))
+                .collect(Collectors.toList());
+    }
+
+    static List<String> notEmpty(List<String> integers) {
+        return integers.stream()
+                .filter(s -> (s != null) && (!s.trim().isEmpty()))
                 .collect(Collectors.toList());
     }
 }

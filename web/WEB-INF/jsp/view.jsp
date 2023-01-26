@@ -38,8 +38,7 @@
                 <c:when test="${type=='OBJECTIVE'|| type=='PERSONAL'}">
                     <tr>
                         <td colspan="2">
-                            <h3><%=((TextSection) section).getContent()%>
-                            </h3>
+                            <h3><%=((TextSection) section).getContent()%></h3>
                         </td>
                     </tr>
                 </c:when>

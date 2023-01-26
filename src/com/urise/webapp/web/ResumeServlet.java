@@ -3,8 +3,8 @@ package com.urise.webapp.web;
 import com.urise.webapp.Config;
 import com.urise.webapp.model.*;
 import com.urise.webapp.storage.Storage;
-import com.urise.webapp.util.DateUtil;
 import com.urise.webapp.util.CheckInNull;
+import com.urise.webapp.util.DateUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -31,6 +31,9 @@ public class ResumeServlet extends HttpServlet {
         String fullName = request.getParameter("fullName");
         final boolean isCreate = (uuid == null || uuid.length() == 0);
         Resume r;
+        if (fullName == null) {
+            throw new IllegalArgumentException("Fill in the full name");
+        }
         if (isCreate) {
             r = new Resume(fullName);
         } else {
@@ -39,14 +42,10 @@ public class ResumeServlet extends HttpServlet {
         }
         for (ContactType type : ContactType.values()) {
             String value = request.getParameter(type.name());
-            if (!CheckInNull.isEmpty(value)) {
-                r.setContact(type, value);
+            if (CheckInNull.isEmpty(value)) {
+                r.getContacts().remove(type);
             } else {
-                if (CheckInNull.isEmpty(value)) {
-                    r.getContacts().remove(type);
-                } else {
-                    r.setContact(type, value);
-                }
+                r.setContact(type, value);
             }
         }
         for (SectionType type : SectionType.values()) {
@@ -57,7 +56,7 @@ public class ResumeServlet extends HttpServlet {
             } else {
                 switch (type) {
                     case OBJECTIVE, PERSONAL -> r.setSection(type, new TextSection(value));
-                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSection(type, new ListSection(value.split("\\n")));
+                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSection(type, new ListSection(value));
                     case EDUCATION, EXPERIENCE -> {
                         List<Company> companies = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");
