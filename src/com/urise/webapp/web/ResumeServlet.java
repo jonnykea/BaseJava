@@ -1,7 +1,7 @@
 package com.urise.webapp.web;
 
-import com.urise.webapp.Config;
 import com.urise.webapp.model.*;
+import com.urise.webapp.storage.SqlStorage;
 import com.urise.webapp.storage.Storage;
 import com.urise.webapp.util.CheckInNull;
 import com.urise.webapp.util.DateUtil;
@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResumeServlet extends HttpServlet {
-    private Storage storage;// = Config.get().getStorage();
+    private final Storage storage = new SqlStorage("jdbc:postgresql://localhost:5432/resumes", "postgres", "SQL1525");
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        storage = Config.get().getStorage();
+//        storage = Config.get().getStorage();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
