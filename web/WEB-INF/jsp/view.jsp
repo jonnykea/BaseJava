@@ -38,7 +38,8 @@
                 <c:when test="${type=='OBJECTIVE'|| type=='PERSONAL'}">
                     <tr>
                         <td colspan="2">
-                            <h3><%=((TextSection) section).getContent()%></h3>
+                            <h3><%=((TextSection) section).getContent()%>
+                            </h3>
                         </td>
                     </tr>
                 </c:when>
@@ -65,7 +66,8 @@
                                             </h4>
                                         </c:when>
                                         <c:otherwise>
-                                            <h4><a href="${company.website}"><%=company.getName()%></a></h4>
+                                            <h4><a href="${company.website}"><%=company.getName()%>
+                                            </a></h4>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -74,8 +76,8 @@
                                 <jsp:useBean id="period" type="com.urise.webapp.model.Period"/>
                                 <div class="content">
                                     <tr>
-                                        <td><%=period.getFullDate()%>
-                                            <br></td>
+                                        <td><%=period.getFullDate()%><br></td>
+                                        <td></td>
                                         <td><b><%=period.getPosition()%>
                                         </b><br>
                                             <%=period.getDescription()%>

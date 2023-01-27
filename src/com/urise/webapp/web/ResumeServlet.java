@@ -31,9 +31,6 @@ public class ResumeServlet extends HttpServlet {
         String fullName = request.getParameter("fullName");
         final boolean isCreate = (uuid == null || uuid.length() == 0);
         Resume r;
-        if (fullName == null) {
-            throw new IllegalArgumentException("Fill in the full name");
-        }
         if (isCreate) {
             r = new Resume(fullName);
         } else {
@@ -55,8 +52,8 @@ public class ResumeServlet extends HttpServlet {
                 r.getSections().remove(type);
             } else {
                 switch (type) {
-                    case OBJECTIVE, PERSONAL -> r.setSection(type, new TextSection(value));
-                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSection(type, new ListSection(value));
+                    case OBJECTIVE, PERSONAL -> r.setSection(type, new TextSection(value.trim()));
+                    case ACHIEVEMENT, QUALIFICATIONS -> r.setSection(type, new ListSection(value.split("\\n")));
                     case EDUCATION, EXPERIENCE -> {
                         List<Company> companies = new ArrayList<>();
                         String[] urls = request.getParameterValues(type.name() + "url");
