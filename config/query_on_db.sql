@@ -13,7 +13,7 @@ SELECT * FROM contact;
 
 SELECT COUNT(uuid) FROM resume;
 
-SELECT uuid, full_name FROM resume ORDER BY full_name ASC;
+SELECT uuid, full_name FROM resume ORDER BY full_name;
 
 SELECT * From resume AS r
                   LEFT JOIN contact AS c on r.uuid = c.resume_uuid;

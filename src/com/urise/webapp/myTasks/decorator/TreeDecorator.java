@@ -1,4 +1,4 @@
-package com.urise.webapp.decorator;
+package com.urise.webapp.myTasks.decorator;
 
 public abstract class TreeDecorator implements ChristmasTree {
     protected ChristmasTree tree;

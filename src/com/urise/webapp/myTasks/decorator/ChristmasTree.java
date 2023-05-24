@@ -1,4 +1,4 @@
-package com.urise.webapp.decorator;
+package com.urise.webapp.myTasks.decorator;
 
 public interface ChristmasTree {
     String decorate();

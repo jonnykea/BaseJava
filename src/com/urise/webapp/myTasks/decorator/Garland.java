@@ -1,4 +1,4 @@
-package com.urise.webapp.decorator;
+package com.urise.webapp.myTasks.decorator;
 
 public class Garland extends TreeDecorator {
 
@@ -7,7 +7,7 @@ public class Garland extends TreeDecorator {
     }
 
     public String decorate() {
-        return  decorateWithGarland() + tree.decorate();
+        return decorateWithGarland() + tree.decorate();
     }
 
     private String decorateWithGarland() {
